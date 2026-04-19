@@ -1,0 +1,1589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PMP Webinar — EduHubSpot</title>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Lora:ital,wght@0,400;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+/* ─────────────────────────────────────────
+   GLOBAL RESET + VARS
+───────────────────────────────────────── */
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+img{max-width:100%;height:auto;display:block;}
+:root{
+  --blue:#428dff;--blue-70:#5495f2;--blue-10:#e9f2ff;
+  --ink:#141414;--dg:#6f6f6f;--lg:#f0f0f0;
+  --border:#e5e5e5;--white:#fff;--bg:#fafafa;
+  --red:#e63b2e;--offwhite:#F0EDE8;
+  --body:"Open Sans","Opensans Variablefont Wdth Wght",Arial,sans-serif;
+  --serif:"Lora Variablefont Wght","Lora","Times New Roman",serif;
+}
+body{font-family:var(--body);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;background:#f0f0f0;margin:0;padding:0;}
+@keyframes rp{0%,100%{opacity:1}50%{opacity:.2}}
+@keyframes scrolltick{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ─────────────────────────────────────────
+   SHARED CTA BUTTON — consistent across all sections
+───────────────────────────────────────── */
+.btn-reserve{
+  display:inline-flex;align-items:center;gap:9px;
+  background:var(--blue);color:var(--white);
+  font-family:var(--body);font-size:14px;font-weight:700;
+  padding:14px 28px;text-decoration:none;
+  border:none;cursor:pointer;
+  transition:opacity .2s;letter-spacing:0.2px;
+}
+.btn-reserve:hover{opacity:.88;}
+.btn-reserve svg{width:14px;height:14px;flex-shrink:0;}
+.btn-reserve-dark{
+  background:var(--ink);
+}
+.btn-reserve-dark:hover{background:var(--blue);opacity:1;}
+
+/* ─────────────────────────────────────────
+   SECTION WRAPPER — shared outer border
+───────────────────────────────────────── */
+.section-wrap{width:100%;}
+
+
+/* ── REVIEW TICKER ── */
+.review-ticker{
+  background:#0d0d0d;
+  height:44px;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  border-bottom:1px solid #1e1e1e;
+  cursor:default;
+  position:relative;
+}
+.review-ticker:hover .review-ticker-inner{
+  animation-play-state:paused;
+}
+/* Fade edges */
+.review-ticker::before,
+.review-ticker::after{
+  content:'';position:absolute;
+  top:0;bottom:0;width:80px;
+  z-index:2;pointer-events:none;
+}
+.review-ticker::before{left:0;background:linear-gradient(to right,#0d0d0d,transparent);}
+.review-ticker::after{right:0;background:linear-gradient(to left,#0d0d0d,transparent);}
+.review-ticker-inner{
+  display:flex;
+  align-items:center;
+  white-space:nowrap;
+  animation:scrolltick 40s linear infinite;
+  will-change:transform;
+}
+/* Each review item */
+.rt-item{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:0 24px;
+  height:44px;
+  border-right:1px solid #222;
+  flex-shrink:0;
+}
+/* Platform logo badge */
+.rt-platform{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  flex-shrink:0;
+}
+.rt-platform-icon{
+  width:16px;height:16px;
+  flex-shrink:0;
+}
+.rt-platform-name{
+  font-size:9px;
+  font-weight:700;
+  letter-spacing:0.5px;
+  text-transform:uppercase;
+  flex-shrink:0;
+}
+.rt-platform.google .rt-platform-name{color:#fff;opacity:0.85;}
+.rt-platform.trustpilot .rt-platform-name{color:#fff;opacity:0.85;}
+/* Divider between platform and review */
+.rt-divider{
+  width:1px;height:18px;
+  background:#333;
+  flex-shrink:0;
+}
+/* Stars */
+.rt-stars{
+  display:flex;gap:2px;flex-shrink:0;
+}
+.rt-star{
+  width:9px;height:9px;
+  background:#FCBD49;
+  clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
+  flex-shrink:0;
+}
+/* Review text */
+.rt-text{
+  font-size:12px;
+  color:#fff;
+  font-style:italic;
+  letter-spacing:0.1px;
+  max-width:280px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+/* Author */
+.rt-author{
+  font-size:10px;
+  font-weight:700;
+  color:#bbb;
+  letter-spacing:0.3px;
+  flex-shrink:0;
+  white-space:nowrap;
+}
+/* Loading */
+.rt-loading{
+  font-size:10px;color:#aaa;
+  letter-spacing:2px;text-transform:uppercase;
+  padding:0 28px;
+}
+
+/* ─────────────────────────────────────────
+   SECTION 1: HERO
+───────────────────────────────────────── */
+.hero{display:grid!important;grid-template-columns:1fr 420px!important;width:100%!important;}
+
+/* Ticker */
+.ticker{background:var(--blue)!important;height:40px!important;overflow:hidden!important;display:flex!important;align-items:center!important;border-bottom:2px solid var(--ink)!important;}
+.ticker-inner{display:flex!important;align-items:center!important;white-space:nowrap!important;animation:scrolltick 26s linear infinite!important;will-change:transform;}
+.ti{display:inline-flex;align-items:center;gap:9px;padding:0 26px;font-size:11px;font-weight:600;color:#fff;letter-spacing:0.3px;border-right:1px solid rgba(255,255,255,.2);height:40px;white-space:nowrap;}
+.ti-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.45);flex-shrink:0;}
+.ti.live .ti-dot{background:#fff;animation:rp 1.2s infinite;}
+.ti.spots{color:#ffd0cd;}
+.ti.spots .ti-dot{background:#ffd0cd;}
+.ti strong{font-weight:700;color:#fff;}
+/* Ink strip */
+.ink-strip{background:var(--ink);padding:8px 36px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #1e1e1e;}
+.is-left{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#fff;opacity:1;}
+.is-right{display:flex;align-items:center;gap:7px;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--red);}
+.is-dot{width:7px;height:7px;border-radius:50%;background:var(--red);animation:rp 1.2s infinite;}
+/* Date unit */
+.date-unit{display:grid!important;grid-template-columns:1fr 1px 1fr!important;border-bottom:2px solid var(--ink)!important;background:var(--white)!important;position:relative!important;}
+.date-col{padding:22px 32px 52px;display:flex;flex-direction:column;justify-content:center;}
+.date-kicker{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--blue);margin-bottom:10px;}
+.date-main{font-family:var(--serif);font-size:clamp(22px,2.8vw,30px);font-weight:700;color:var(--ink);letter-spacing:-0.5px;line-height:1.05;margin-bottom:8px;}
+.date-time{font-size:14px;color:var(--ink);font-weight:600;display:flex;align-items:center;gap:7px;opacity:0.7;}
+.date-time-bullet{width:5px;height:5px;border-radius:50%;background:var(--dg);flex-shrink:0;}
+.badge-47{position:absolute;bottom:0;left:0;background:var(--red);color:#fff;font-size:13px;font-weight:700;padding:9px 22px;letter-spacing:0.5px;z-index:5;}
+.date-sep{background:var(--border);}
+.timer-right{padding:22px 32px;background:var(--bg);display:flex;flex-direction:column;justify-content:center;}
+.timer-label{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--ink);opacity:0.6;margin-bottom:12px;}
+.timer{display:flex;align-items:flex-end;gap:0;}
+.tc{text-align:center;min-width:50px;}
+.tn{font-family:var(--serif);font-size:clamp(28px,3.5vw,40px);font-weight:700;color:var(--ink);letter-spacing:-2px;line-height:1;}
+.tl{font-size:9px;color:var(--ink);opacity:0.5;letter-spacing:2px;text-transform:uppercase;margin-top:6px;font-weight:700;}
+.tsep{font-size:24px;color:var(--ink);opacity:0.2;font-weight:400;padding:0 3px 6px;line-height:1;}
+/* Hero copy */
+.hero-copy{padding:36px 40px 40px;flex:1;display:flex;flex-direction:column;justify-content:space-between;background:var(--offwhite);}
+.copy-kicker{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--red);margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+.copy-kicker::after{content:'';flex:1;height:1px;background:var(--red);opacity:.35;}
+.copy-hl{font-family:var(--serif);font-size:clamp(28px,3.5vw,46px);line-height:1.04;letter-spacing:-1.5px;margin-bottom:20px;color:var(--ink);}
+.copy-hl em{font-style:italic;color:var(--blue);font-weight:700;}
+.copy-hl strong{font-weight:700;font-style:normal;display:block;}
+.copy-divider{height:1px;background:var(--border);margin-bottom:18px;}
+.copy-deck{font-size:14px;color:#444;line-height:1.8;font-weight:400;margin-bottom:28px;max-width:480px;}
+.hero-stats{display:grid!important;grid-template-columns:repeat(4,1fr)!important;border:1px solid var(--border)!important;margin-bottom:20px!important;background:var(--border)!important;gap:1px!important;}
+.hero-stat{background:var(--white);padding:12px 14px;}
+.hero-stat-num{font-size:20px;font-weight:700;color:var(--ink);letter-spacing:-1px;line-height:1;margin-bottom:2px;}
+.hero-stat-lbl{font-size:10px;color:#555;font-weight:600;}
+.hero-cta-row{display:flex;align-items:center;gap:16px;margin-bottom:14px;}
+.hero-trust{font-size:12px;color:#888;font-weight:500;}
+.spots-line{font-size:12px;color:#555;font-weight:500;display:flex;align-items:center;gap:7px;}
+.spots-pulse{width:7px;height:7px;border-radius:50%;background:var(--red);animation:rp 1.2s infinite;flex-shrink:0;}
+.spots-line strong{color:var(--red);font-weight:700;}
+/* Hero image */
+.hero-right{position:relative!important;background:#ece8e0!important;display:flex!important;align-items:flex-end!important;justify-content:center!important;overflow:hidden!important;min-height:600px!important;}
+.right-grid{position:absolute;inset:0;z-index:0;background-image:repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(20,20,20,.04) 39px,rgba(20,20,20,.04) 40px),repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(20,20,20,.04) 39px,rgba(20,20,20,.04) 40px);}
+.right-header{position:absolute;top:0;left:0;right:0;background:var(--ink);padding:9px 16px;font-size:10px;color:#fff;font-weight:600;letter-spacing:0.3px;z-index:10;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;opacity:0.8;}
+.hero-img{width:100%;height:100%;object-fit:cover;object-position:top center;position:absolute;inset:0;z-index:2;}
+.img-ph{position:relative;z-index:3;font-size:11px;color:#bbb;letter-spacing:1px;text-transform:uppercase;padding-bottom:24px;}
+.fc{position:absolute;z-index:10;background:var(--white);border:1px solid var(--border);padding:12px 16px;}
+.fc-spots{top:56px;right:20px;}
+.fc-rating{bottom:24px;left:20px;}
+.fc-num{font-size:22px;font-weight:700;color:var(--ink);letter-spacing:-1px;line-height:1;margin-bottom:3px;}
+.fc-lbl{font-size:10px;color:var(--dg);}
+.fc-stars{display:flex;gap:2px;margin-bottom:5px;}
+.fc-star{width:13px;height:13px;background:#FCBD49;clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);}
+.fc-star.h{background:var(--lg);}
+.fc-rating-num{font-size:18px;font-weight:700;color:var(--ink);letter-spacing:-0.5px;line-height:1;margin-bottom:3px;}
+
+/* ─────────────────────────────────────────
+   SECTION 2: WHAT YOU'LL LEARN (B2)
+───────────────────────────────────────── */
+.learn{background:var(--bg);}
+.learn-top{background:var(--ink);padding:10px 44px;display:flex;align-items:center;justify-content:space-between;}
+.learn-top-l{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#fff;opacity:1;}
+.learn-top-r{display:flex;align-items:center;gap:8px;}
+.learn-dot{width:7px;height:7px;border-radius:50%;background:var(--red);animation:rp 1.3s infinite;flex-shrink:0;}
+.learn-top-txt{font-size:10px;color:#fff;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;opacity:0.9;}
+.learn-head{padding:28px 44px 20px;display:flex;align-items:flex-end;justify-content:space-between;}
+.learn-hl{font-family:var(--serif);font-size:clamp(22px,2.8vw,34px);font-weight:700;color:var(--ink);letter-spacing:-0.5px;line-height:1.05;}
+.learn-hl em{font-style:italic;color:var(--blue);}
+.learn-head-cta{display:inline-flex;align-items:center;gap:6px;background:var(--ink);color:var(--white);font-family:var(--body);font-size:10px;font-weight:700;padding:10px 20px;text-decoration:none;transition:background .15s;}
+.learn-head-cta:hover{background:var(--blue);}
+.learn-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--border);}
+.b2-card{background:var(--white);padding:24px 18px 18px;display:flex;flex-direction:column;cursor:pointer;position:relative;overflow:hidden;min-height:250px;border-top:3px solid transparent;transition:border-top-color .25s,background .2s;}
+.b2-card:hover{background:var(--bg);border-top-color:var(--blue);}
+.b2-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--blue);transform:scaleY(0);transform-origin:top;transition:transform .3s ease;}
+.b2-card:hover::before{transform:scaleY(1);}
+.b2-chip{position:absolute;top:14px;right:14px;background:var(--lg);padding:4px 8px;font-size:11px;font-weight:700;color:var(--dg);letter-spacing:-0.3px;line-height:1;opacity:0;transform:translateY(-4px);transition:opacity .25s,transform .25s,background .25s,color .25s;}
+.b2-card:hover .b2-chip{opacity:1;transform:translateY(0);background:var(--blue);color:#fff;}
+.b2-num{font-size:42px;font-weight:700;color:#ddd;letter-spacing:-3px;line-height:1;margin-bottom:12px;transition:color .25s;}
+.b2-card:hover .b2-num{color:#daeaff;}
+.b2-icon{width:32px;height:32px;background:var(--lg);display:flex;align-items:center;justify-content:center;margin-bottom:12px;transition:background .25s;}
+.b2-card:hover .b2-icon{background:var(--blue);}
+.b2-icon svg{width:16px;height:16px;stroke:var(--dg);transition:stroke .25s;}
+.b2-card:hover .b2-icon svg{stroke:#fff;}
+.b2-title{font-size:13px;font-weight:700;color:var(--ink);line-height:1.45;flex:1;margin-bottom:10px;transition:color .25s;}
+.b2-card:hover .b2-title{color:var(--blue);}
+.b2-foot{display:flex;align-items:center;justify-content:space-between;padding-top:10px;border-top:1px solid var(--border);margin-top:auto;transition:border-color .25s;}
+.b2-card:hover .b2-foot{border-color:#c8d9ff;}
+.b2-tag{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#aaa;transition:color .25s;}
+.b2-card:hover .b2-tag{color:var(--blue);}
+.b2-arr{font-size:13px;color:var(--border);transition:color .25s,transform .25s;}
+.b2-card:hover .b2-arr{color:var(--blue);transform:translateX(3px);}
+.learn-footer{padding:14px 44px;background:var(--white);border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.learn-footer-txt{font-size:10px;color:var(--ink);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;opacity:0.8;}
+
+/* ─────────────────────────────────────────
+   SECTION 3: 3 BONUSES (F2 flip)
+───────────────────────────────────────── */
+.bonuses{background:var(--ink);}
+.bonuses-top{background:var(--ink);padding:10px 44px;border-bottom:1px solid #1e1e1e;display:flex;align-items:center;justify-content:space-between;}
+.bonuses-top-l{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#fff;opacity:1;}
+.bonuses-top-r{display:flex;align-items:center;gap:7px;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--blue);}
+.bonuses-dot{width:5px;height:5px;border-radius:50%;background:var(--blue);animation:rp 1.3s infinite;}
+.bonuses-head{padding:32px 44px 24px;border-bottom:1px solid #1e1e1e;display:flex;align-items:flex-end;justify-content:space-between;}
+.bonuses-hl{font-family:var(--serif);font-size:clamp(22px,2.8vw,36px);font-weight:700;color:#fff;letter-spacing:-0.5px;line-height:1.05;}
+.bonuses-hl em{font-style:italic;color:var(--blue);}
+.bonuses-head-sub{font-size:11px;color:#999;max-width:220px;text-align:right;line-height:1.6;font-weight:300;}
+.bonuses-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#1a1a1a;}
+.flip{height:320px;perspective:1000px;cursor:pointer;}
+.flip-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .65s cubic-bezier(.4,0,.2,1);}
+.flip:hover .flip-inner{transform:rotateY(180deg);}
+.flip-front,.flip-back{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;padding:32px 28px;display:flex;flex-direction:column;}
+.flip-front{background:#161616;}
+.front-tag{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--blue);margin-bottom:18px;}
+.front-icon{width:48px;height:48px;background:#222;border:1px solid #333;display:flex;align-items:center;justify-content:center;margin-bottom:20px;}
+.front-icon svg{width:22px;height:22px;stroke:#aaa;}
+.front-title{font-family:var(--serif);font-size:19px;font-weight:700;color:#fff;line-height:1.3;flex:1;letter-spacing:-0.3px;}
+.front-sub{font-size:12px;color:#aaa;margin-top:8px;line-height:1.5;font-weight:300;}
+.front-foot{display:flex;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid #2a2a2a;margin-top:12px;}
+.front-hint{font-size:8px;color:#666;letter-spacing:1.5px;text-transform:uppercase;}
+.front-arr{font-size:14px;color:#777;}
+.flip-back{background:var(--offwhite);transform:rotateY(180deg);justify-content:space-between;}
+.back-tag{font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--blue);margin-bottom:12px;}
+.back-title{font-family:var(--serif);font-size:20px;font-weight:700;color:var(--ink);line-height:1.2;margin-bottom:14px;letter-spacing:-0.5px;}
+.back-body{font-size:13px;color:var(--dg);line-height:1.8;font-weight:300;flex:1;}
+.back-divider{height:1px;background:var(--border);margin:16px 0;}
+.back-val{font-size:10px;font-weight:700;color:var(--blue);letter-spacing:0.5px;display:flex;align-items:center;gap:8px;}
+.back-val::after{content:'→';font-size:14px;}
+.bonuses-footer{padding:14px 44px;border-top:1px solid #1e1e1e;display:flex;justify-content:space-between;align-items:center;}
+.bonuses-ft{font-size:10px;color:#fff;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;opacity:0.75;}
+
+/* ─────────────────────────────────────────
+   SECTION 4: WHO IS THIS FOR (LC1)
+───────────────────────────────────────── */
+.whosfor{background:var(--white);}
+.wf-top{background:var(--ink);padding:10px 44px;display:flex;align-items:center;justify-content:space-between;}
+.wf-top-l{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#fff;opacity:1;}
+.wf-top-r{display:flex;align-items:center;gap:7px;font-size:10px;color:var(--blue);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;}
+.wf-dot{width:5px;height:5px;border-radius:50%;background:var(--blue);animation:rp 1.3s infinite;}
+.wf-head{padding:28px 44px 24px;border-bottom:2px solid var(--ink);display:flex;align-items:flex-end;justify-content:space-between;}
+.wf-hl{font-family:var(--serif);font-size:clamp(22px,2.8vw,34px);font-weight:700;color:var(--ink);letter-spacing:-0.5px;line-height:1.05;}
+.wf-hl em{font-style:italic;color:var(--blue);}
+.wf-head-note{font-size:12px;color:#666;text-align:right;max-width:220px;line-height:1.6;font-weight:400;}
+.wf-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);}
+.wf-card{background:var(--white);padding:28px 22px;display:flex;flex-direction:column;cursor:pointer;border-top:3px solid var(--border);transition:border-top-color .25s,transform .25s,box-shadow .25s;position:relative;overflow:hidden;}
+.wf-card:hover{border-top-color:var(--blue);transform:translateY(-3px);box-shadow:0 8px 32px rgba(66,141,255,.1);}
+.wf-stat{font-family:var(--serif);font-size:52px;font-weight:700;color:var(--blue);letter-spacing:-3px;line-height:1;margin-bottom:4px;transition:color .25s;}
+.wf-stat-sub{font-size:9px;color:#777;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px;}
+.wf-type{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#aaa;margin-bottom:10px;transition:color .25s;}
+.wf-card:hover .wf-type{color:var(--blue);}
+.wf-quote{font-family:var(--serif);font-style:italic;font-weight:400;font-size:14px;color:#222;line-height:1.55;margin-bottom:12px;border-left:2px solid #bbb;padding-left:12px;flex:1;transition:border-color .25s;}
+.wf-card:hover .wf-quote{border-left-color:var(--blue);}
+.wf-body{font-size:12px;color:#555;line-height:1.65;font-weight:400;}
+.wf-foot{display:flex;align-items:center;justify-content:space-between;margin-top:16px;padding-top:12px;border-top:1px solid var(--border);transition:border-color .25s;}
+.wf-card:hover .wf-foot{border-color:#c8d9ff;}
+.wf-tag{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#aaa;transition:color .25s;}
+.wf-card:hover .wf-tag{color:var(--blue);}
+.wf-arr{font-size:14px;color:var(--border);transition:color .25s,transform .25s;}
+.wf-card:hover .wf-arr{color:var(--blue);transform:translateX(3px);}
+.wf-footer{padding:14px 44px;background:var(--bg);border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
+.wf-ft{font-size:10px;color:var(--ink);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;opacity:0.85;}
+
+/* ─────────────────────────────────────────
+   SECTION 5: FINAL CTA (CTA1)
+───────────────────────────────────────── */
+.final-cta{background:var(--ink);}
+.fc-strip{background:#0a0a0a;padding:9px 44px;border-bottom:1px solid #1e1e1e;display:flex;align-items:center;justify-content:space-between;}
+.fc-strip-l{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#fff;opacity:1;}
+.fc-strip-r{display:flex;align-items:center;gap:7px;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--red);}
+.fc-strip-dot{width:6px;height:6px;border-radius:50%;background:var(--red);animation:rp 1.2s infinite;}
+.fc-body{display:grid;grid-template-columns:1fr 1px 1fr;align-items:center;min-height:180px;}
+.fc-sep{background:#1e1e1e;}
+.fc-left{padding:40px 44px;}
+.fc-kicker{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:8px;margin-bottom:14px;}
+.fc-kicker-dot{width:7px;height:7px;border-radius:50%;background:var(--red);animation:rp 1.2s infinite;flex-shrink:0;}
+.fc-hl{font-family:var(--serif);font-size:clamp(26px,3vw,40px);font-weight:700;color:#fff;letter-spacing:-1px;line-height:1.05;margin-bottom:12px;}
+.fc-sub{font-size:14px;color:#ccc;font-weight:300;line-height:1.65;}
+.fc-sub strong{color:#fff;font-weight:600;}
+.fc-right{padding:40px 44px;display:flex;flex-direction:column;gap:20px;}
+.fc-timer-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#fff;opacity:0.8;}
+.fc-timer{display:flex;align-items:flex-end;gap:4px;}
+.fc-tc{text-align:center;background:#0d0d0d;border:1px solid #1e1e1e;min-width:66px;padding:14px 8px 10px;}
+.fc-tn{font-family:var(--serif);font-size:40px;font-weight:700;color:#fff;letter-spacing:-2px;line-height:1;}
+.fc-tl{font-size:9px;color:#fff;letter-spacing:2px;text-transform:uppercase;margin-top:6px;font-weight:600;opacity:0.7;}
+.fc-tsep{font-size:28px;color:#666;font-weight:400;padding:0 2px 12px;line-height:1;}
+.fc-cta-row{display:flex;align-items:center;gap:16px;}
+.fc-spots{font-size:12px;color:#ccc;display:flex;align-items:center;gap:6px;white-space:nowrap;}
+.fc-spots-dot{width:6px;height:6px;border-radius:50%;background:var(--red);animation:rp 1.2s infinite;flex-shrink:0;}
+.fc-spots strong{color:#fff;font-weight:700;}
+
+/* ─────────────────────────────────────────
+   RESPONSIVE
+───────────────────────────────── */
+
+/* ═══════════════════════════════════════════════════════
+   RESPONSIVE — full coverage
+   1280px  Desktop large
+   1024px  Desktop/Tablet landscape
+   768px   Tablet portrait
+   480px   Mobile landscape
+   375px   Mobile portrait
+═══════════════════════════════════════════════════════ */
+
+/* ── 1280px — large desktop: no changes needed ── */
+
+/* ── 1024px — tablet landscape ── */
+@media(max-width:1024px){
+  /* Hero */
+  .hero{grid-template-columns:1fr!important;}
+  .hero-right{min-height:360px!important;order:-1;}
+  .right-grid,
+  .hero-platforms{display:none;}/* hide grid bg + platform links on smaller */
+
+  /* Date unit */
+  .date-unit{grid-template-columns:1fr 1px 1fr!important;}
+  .tn{font-size:clamp(24px,3vw,36px);}
+
+  /* Learn grid */
+  .learn-grid{grid-template-columns:repeat(3,1fr)!important;}
+  .learn-head{flex-direction:column;align-items:flex-start;gap:14px;padding:24px 28px 20px;}
+  .learn-head-cta{align-self:flex-start;}
+
+  /* Bonuses */
+  .bonuses-head{flex-direction:column;align-items:flex-start;gap:10px;padding:24px 28px;}
+  .bonuses-head-sub{text-align:left;max-width:none;}
+
+  /* Who is this for */
+  .wf-grid{grid-template-columns:repeat(2,1fr);}
+  .wf-head{flex-direction:column;align-items:flex-start;gap:10px;padding:24px 28px 20px;}
+  .wf-head-note{text-align:left;max-width:none;}
+
+  /* Final CTA */
+  .fc-body{grid-template-columns:1fr 1px 1fr;}
+
+  /* Footer */
+  .footer-top{padding:36px 36px;}
+  .footer-bottom{padding:16px 36px;}
+  .footer-links{gap:16px;}
+}
+
+/* ── 768px — tablet portrait ── */
+@media(max-width:768px){
+  /* Global padding reduction */
+  .ticker{height:36px;}
+  .ti{padding:0 16px;font-size:10px;height:36px;}
+
+  .ink-strip{padding:7px 20px;}
+  .is-left{font-size:9px;}
+  .is-right{font-size:9px;}
+
+  /* Date unit — stack vertically */
+  .date-unit{grid-template-columns:1fr!important;}
+  .date-sep{display:none!important;}
+  .date-col{padding:20px 20px 50px;}
+  .timer-right{padding:18px 20px;border-top:1px solid var(--border);}
+  .badge-47{left:0;}
+
+  /* Hero copy */
+  .hero-copy{padding:24px 20px 28px;}
+  .copy-hl{font-size:clamp(26px,5vw,38px);}
+  .hero-stats{grid-template-columns:repeat(2,1fr)!important;}
+  .hero-cta-row{flex-wrap:wrap;gap:12px;}
+  .btn-reserve{width:100%;justify-content:center;}
+  .hero-trust{width:100%;text-align:center;}
+  .spots-line{flex-wrap:wrap;}
+
+  /* Learn */
+  .learn-grid{grid-template-columns:repeat(2,1fr)!important;}
+  .learn-top{padding:8px 20px;flex-direction:column;align-items:flex-start;gap:4px;}
+  .learn-top-l{font-size:9px;}
+  .learn-head{padding:20px 20px 16px;}
+  .learn-footer{padding:12px 20px;flex-direction:column;align-items:flex-start;gap:10px;}
+
+  /* Bonuses top bar padding */
+  .bonuses-top,.bonuses-head,.bonuses-footer{padding-left:20px;padding-right:20px;}
+  /* Flip handled by dedicated bonus mobile block below */
+
+  /* Who is this for */
+  .wf-grid{grid-template-columns:1fr!important;}
+  .wf-head,.wf-footer{padding-left:20px;padding-right:20px;}
+  .wf-footer{flex-direction:column;align-items:flex-start;gap:12px;}
+
+  /* Final CTA — stack */
+  .fc-strip{padding:8px 20px;flex-direction:column;align-items:flex-start;gap:4px;}
+  .fc-body{grid-template-columns:1fr!important;}
+  .fc-sep{display:none!important;}
+  .fc-left{padding:28px 20px 20px;}
+  .fc-right{padding:0 20px 28px;}
+  .fc-timer{gap:2px;}
+  .fc-tc{min-width:56px;padding:10px 6px 8px;}
+  .fc-tn{font-size:32px;}
+  .fc-cta-row{flex-wrap:wrap;gap:12px;}
+
+  /* Footer */
+  .footer-top{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:24px;
+    padding:28px 20px;
+  }
+  .footer-top-right{
+    align-items:flex-start;
+    width:100%;
+  }
+  .footer-btn{width:100%;justify-content:center;}
+  .footer-bottom{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:14px;
+    padding:16px 20px;
+  }
+  .footer-right{flex-direction:column;align-items:flex-start;gap:10px;}
+  .footer-links{gap:12px;}
+}
+
+/* ── 480px — mobile landscape / large phones ── */
+@media(max-width:480px){
+  /* Ticker */
+  .ti{padding:0 14px;font-size:9px;}
+
+  /* Date */
+  .date-main{font-size:20px!important;}
+  .tn{font-size:28px!important;}
+
+  /* Hero headline */
+  .copy-hl{font-size:clamp(24px,7vw,34px);letter-spacing:-1px;}
+  .hero-stats{grid-template-columns:1fr 1fr!important;}
+  .hero-stat-num{font-size:17px;}
+
+  /* Learn — 2 cols on mobile */
+  .learn-grid{grid-template-columns:repeat(2,1fr)!important;}
+  .b2-num{font-size:32px!important;}
+  .b2-card{min-height:200px;}
+
+  /* Bonuses heading size */
+  .bonuses-hl{font-size:clamp(20px,5vw,28px);}
+  /* flip card styling handled by dedicated mobile block */
+
+  /* Who is this for — 2 cols on mobile */
+  .wf-grid{grid-template-columns:repeat(2,1fr)!important;}
+  .wf-stat{font-size:38px!important;}
+  .wf-hl{font-size:clamp(20px,5vw,28px);}
+  .wf-card{padding:20px 16px 16px;}
+  .wf-quote{font-size:13px;}
+  .wf-body{font-size:11px;}
+
+  /* Final CTA */
+  .fc-hl{font-size:clamp(22px,5vw,30px);}
+  .fc-tn{font-size:28px!important;}
+  .fc-tc{min-width:48px!important;}
+  .fc-tsep{font-size:20px;}
+
+  /* Footer */
+  .footer-hl{font-size:clamp(20px,5vw,28px);}
+  .footer-links{flex-wrap:wrap;gap:10px;}
+}
+
+/* ── 375px — mobile portrait (iPhone SE etc) ── */
+@media(max-width:375px){
+  body{padding:0!important;}
+
+  .hero-copy{padding:20px 16px 24px;}
+  .date-col,.timer-right{padding-left:16px;padding-right:16px;}
+
+  .copy-hl{font-size:clamp(22px,6vw,30px);}
+  .copy-deck{font-size:13px;}
+
+  /* Stats — 2 cols */
+  .hero-stats{grid-template-columns:1fr 1fr!important;}
+  .hero-stat{padding:10px 10px;}
+  .hero-stat-num{font-size:15px;}
+  .hero-stat-lbl{font-size:8px;}
+
+  /* Learn — keep 2 cols, tighter padding */
+  .learn-grid{grid-template-columns:repeat(2,1fr)!important;}
+  .b2-card{padding:16px 12px 12px;min-height:180px;}
+  .b2-num{font-size:26px!important;}
+  .b2-title{font-size:11px;}
+  .b2-icon{width:26px;height:26px;}
+  .b2-icon svg{width:13px;height:13px;}
+
+  /* Bonuses — keep 2 cols, tighter */
+  .bonuses-grid{grid-template-columns:repeat(2,1fr)!important;}
+  .flip-front,.flip-back{padding:16px 14px;}
+  .front-tag{font-size:8px;margin-bottom:10px;}
+  .front-icon{width:36px;height:36px;margin-bottom:12px;}
+  .front-title{font-size:13px!important;}
+  .back-title{font-size:14px!important;}
+  .back-body{font-size:11px!important;}
+
+  /* Who is this for — 2 cols */
+  .wf-grid{grid-template-columns:repeat(2,1fr)!important;}
+  .wf-card{padding:16px 14px 14px;}
+  .wf-stat{font-size:32px!important;}
+  .wf-stat-sub{font-size:8px;}
+  .wf-quote{font-size:12px;padding-left:8px;}
+  .wf-body{font-size:10px;}
+
+  /* Padding cleanup */
+  .learn-top,
+  .bonuses-top,.bonuses-head,.bonuses-footer,
+  .wf-head,.wf-footer,
+  .fc-strip,.fc-left,.fc-right,
+  .footer-top,.footer-bottom{padding-left:16px;padding-right:16px;}
+  .btn-reserve{font-size:13px;padding:13px 20px;}
+  .learn-head,.learn-footer{padding-left:16px;padding-right:16px;}
+
+  /* Timer */
+  .tn{font-size:24px!important;}
+  .tc{min-width:40px!important;}
+
+  /* Footer */
+  .footer-hl{font-size:clamp(18px,5vw,24px);}
+  .footer-sub{font-size:12px;}
+  .footer-btn{font-size:13px;padding:13px 20px;}
+  .footer-links{gap:8px;}
+}
+
+/* ── Touch devices — disable hover-dependent interactions ── */
+@media(hover:none){
+  /* Flip cards handled by mobile CSS block */
+  .flip:hover .flip-inner{transform:none;}
+
+  /* Stat chips always visible on touch */
+  .b2-chip{opacity:1!important;transform:translateY(0)!important;background:var(--blue)!important;color:#fff!important;}
+
+  /* Review ticker — don't pause (no hover on touch) */
+  .review-ticker:hover .review-ticker-inner{animation-play-state:running;}
+  .footer-ticker:hover .footer-ticker-inner{animation-play-state:running;}
+
+  /* Show check on who-is-this-for */
+  .a-check{opacity:1!important;transform:translateY(0)!important;}
+}
+
+
+/* ── HERO IMAGE PLATFORM LINKS ── */
+.hero-platforms{
+  position:absolute;
+  bottom:20px;
+  left:16px;
+  display:flex;
+  flex-direction:row;
+  gap:10px;
+  z-index:10;
+}
+.platform-link{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:11px 16px;
+  background:rgba(20,20,20,0.55);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,0.12);
+  text-decoration:none;
+  transition:background .2s,border-color .2s;
+  cursor:pointer;
+}
+.platform-link:hover{
+  background:rgba(20,20,20,0.75);
+  border-color:rgba(255,255,255,0.25);
+}
+.platform-link-icon{
+  width:20px;height:20px;flex-shrink:0;
+}
+.platform-link-text{
+  display:flex;flex-direction:column;gap:2px;
+}
+.platform-link-label{
+  font-size:8px;
+  font-weight:700;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  color:rgba(255,255,255,0.5);
+  line-height:1;
+}
+.platform-link-name{
+  font-size:12px;
+  font-weight:700;
+  color:#fff;
+  line-height:1;
+  letter-spacing:0.2px;
+}
+.platform-link-stars{
+  display:flex;gap:2px;margin-top:2px;
+}
+.platform-link-star{
+  width:9px;height:9px;
+  background:#FCBD49;
+  clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
+}
+.platform-link-star.h{background:rgba(255,255,255,0.2);}
+.platform-link-count{
+  font-size:9px;color:rgba(255,255,255,0.5);
+  margin-top:2px;font-weight:400;
+}
+
+/* ── HERO STAT PLATFORM CELLS ── */
+.hero-stat-platform{display:flex;flex-direction:column;justify-content:center;gap:4px;transition:background .15s;}
+.hero-stat-platform:hover{background:#f0f7ff;}
+.hero-stat-platform-top{display:flex;align-items:center;gap:6px;}
+
+/* ════════════════════════════════════════
+   WEBINAR FOOTER — light theme
+════════════════════════════════════════ */
+
+/* Top — warm offwhite CTA */
+.footer-top{
+  background:var(--offwhite);
+  padding:48px 60px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-top:2px solid var(--ink);
+  border-bottom:1px solid #ddd;
+  gap:40px;
+}
+.footer-top-left{}
+.footer-kicker{
+  font-size:9px;font-weight:700;letter-spacing:3px;
+  text-transform:uppercase;color:var(--red);
+  display:flex;align-items:center;gap:7px;margin-bottom:14px;
+}
+.footer-kicker-dot{width:6px;height:6px;border-radius:50%;background:var(--red);animation:rp 1.2s infinite;}
+.footer-hl{
+  font-family:var(--serif);
+  font-size:clamp(22px,2.8vw,36px);font-weight:700;
+  color:var(--ink);letter-spacing:-0.5px;line-height:1.05;margin-bottom:8px;
+}
+.footer-hl em{font-style:italic;color:var(--blue);}
+.footer-sub{font-size:13px;color:#555;font-weight:400;line-height:1.7;}
+.footer-sub strong{color:var(--ink);font-weight:700;}
+.footer-top-right{display:flex;flex-direction:column;align-items:flex-end;gap:10px;flex-shrink:0;}
+.footer-btn{
+  display:inline-flex;align-items:center;gap:9px;
+  background:var(--blue);color:#fff;
+  font-family:var(--body);font-size:14px;font-weight:700;
+  padding:15px 32px;text-decoration:none;
+  transition:opacity .2s;white-space:nowrap;
+}
+.footer-btn:hover{opacity:.88;}
+.footer-spots{
+  font-size:11px;color:#666;
+  display:flex;align-items:center;gap:6px;
+}
+.footer-spots-dot{width:6px;height:6px;border-radius:50%;background:var(--red);animation:rp 1.2s infinite;flex-shrink:0;}
+.footer-spots strong{color:var(--red);}
+
+/* Running info ticker — white bg */
+@keyframes footer-tick{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.footer-ticker{
+  background:var(--offwhite);
+  height:44px;overflow:hidden;
+  display:flex;align-items:center;
+  border-top:1px solid #ddd;
+  border-bottom:1px solid #ddd;
+}
+.footer-ticker-inner{
+  display:flex;align-items:center;
+  white-space:nowrap;
+  animation:footer-tick 30s linear infinite;
+}
+.footer-ticker:hover .footer-ticker-inner{animation-play-state:paused;}
+.ft-item{
+  display:inline-flex;align-items:center;gap:9px;
+  padding:0 28px;height:44px;
+  font-size:11px;font-weight:600;color:#444;
+  letter-spacing:0.3px;
+  border-right:1px solid #ddd;white-space:nowrap;
+}
+.ft-dot{width:5px;height:5px;border-radius:50%;background:var(--blue);flex-shrink:0;}
+.ft-item.accent{color:var(--blue);}
+.ft-item.accent .ft-dot{background:var(--blue);}
+
+/* Bottom bar — white */
+.footer-bottom{
+  background:var(--offwhite);
+  border-top:1px solid #ddd;
+  padding:20px 60px;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:20px;flex-wrap:wrap;
+}
+.footer-brand{font-size:16px;font-weight:700;color:var(--ink);letter-spacing:-0.3px;}
+.footer-brand span{color:var(--blue);}
+.footer-links{display:flex;gap:24px;flex-wrap:wrap;}
+.footer-link{font-size:11px;color:#666;text-decoration:none;letter-spacing:0.3px;transition:color .15s;white-space:nowrap;font-weight:600;}
+.footer-link:hover{color:var(--ink);}
+.footer-right{display:flex;align-items:center;gap:20px;}
+.footer-social{display:flex;gap:10px;align-items:center;}
+.footer-social a{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:28px;height:28px;
+  color:#777;text-decoration:none;
+  font-size:10px;font-weight:700;
+  border:1px solid #bbb;
+  transition:color .15s,border-color .15s;
+}
+.footer-social a:hover{color:var(--ink);border-color:var(--ink);}
+.footer-copy{font-size:11px;color:#888;white-space:nowrap;}
+
+/* bonus mobile handled by carousel show/hide */
+
+/* ════════════════════════════════════════════
+   BONUS CAROUSEL — mobile only (< 768px)
+   Desktop uses flip cards (above)
+════════════════════════════════════════════ */
+.bonus-carousel-wrap{display:none;} /* hidden on desktop */
+
+@keyframes shimmer{0%{left:-100%}100%{left:200%}}
+
+.carousel-progress{height:2px;background:#1a1a1a;position:relative;overflow:hidden;}
+.carousel-progress-fill{height:100%;background:var(--blue);width:0%;transition:width .08s linear;}
+
+.carousel-track{display:flex;transition:transform .55s cubic-bezier(.4,0,.2,1);will-change:transform;}
+
+/* Each card */
+.bonus-card-m{
+  flex:0 0 100%;
+  display:flex;flex-direction:column;
+  background:#111;
+  min-height:auto;
+  overflow:hidden;
+}
+/* Card top — icon + tag */
+.bcm-top{
+  background:#0d0d0d;
+  padding:24px 20px 20px;
+  display:flex;align-items:center;gap:16px;
+  border-bottom:1px solid #1e1e1e;
+  position:relative;overflow:hidden;
+}
+.bcm-top::before{
+  content:'';position:absolute;
+  width:200px;height:200px;border-radius:50%;
+  border:1px solid rgba(66,141,255,.07);
+  right:-60px;top:-60px;
+  transition:transform .5s ease;
+}
+.bcm-icon-wrap{
+  width:56px;height:56px;flex-shrink:0;
+  border:1px solid #1e1e1e;
+  display:flex;align-items:center;justify-content:center;
+  transition:border-color .3s,background .3s;
+  position:relative;overflow:hidden;
+}
+.bcm-icon-wrap::after{
+  content:'';position:absolute;top:0;bottom:0;width:40%;
+  background:linear-gradient(90deg,transparent,rgba(66,141,255,.18),transparent);
+  left:-100%;
+}
+.bcm-card-active .bcm-icon-wrap{border-color:rgba(66,141,255,.3);background:rgba(66,141,255,.06);}
+.bcm-card-active .bcm-icon-wrap::after{animation:shimmer 1.2s ease .1s;}
+.bcm-icon-wrap svg{width:24px;height:24px;stroke:#555;transition:stroke .3s;}
+.bcm-card-active .bcm-icon-wrap svg{stroke:var(--blue);}
+.bcm-top-text{}
+.bcm-tag{font-size:8px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--blue);margin-bottom:4px;}
+.bcm-title-sm{font-family:var(--serif);font-size:15px;font-weight:700;color:#999;line-height:1.2;transition:color .3s;}
+.bcm-card-active .bcm-title-sm{color:#fff;}
+
+/* Card body */
+.bcm-body{
+  padding:24px 20px 20px;
+  display:flex;flex-direction:column;
+  flex:1;
+  opacity:.4;transform:translateY(8px);
+  transition:opacity .45s ease,transform .45s ease;
+}
+.bcm-card-active .bcm-body{opacity:1;transform:translateY(0);}
+.bcm-body-tag{font-size:8px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--blue);margin-bottom:10px;}
+.bcm-body-title{font-family:var(--serif);font-size:clamp(18px,4vw,24px);font-weight:700;color:#fff;letter-spacing:-0.3px;line-height:1.1;margin-bottom:14px;}
+.bcm-body-text{font-size:13px;color:#888;line-height:1.75;font-weight:300;flex:1;margin-bottom:20px;}
+.bcm-body-text strong{color:#ccc;font-weight:600;}
+.bcm-footer{display:flex;align-items:center;justify-content:space-between;padding-top:16px;border-top:1px solid #1e1e1e;}
+.bcm-val{
+  display:inline-flex;align-items:center;gap:7px;
+  background:rgba(66,141,255,.1);border:1px solid rgba(66,141,255,.2);
+  color:var(--blue);font-size:10px;font-weight:700;padding:7px 14px;letter-spacing:0.5px;
+}
+.bcm-unlock{font-size:9px;color:#333;letter-spacing:1px;text-transform:uppercase;}
+
+/* Controls */
+.carousel-controls-m{
+  padding:14px 20px;
+  border-top:1px solid #1a1a1a;
+  display:flex;align-items:center;justify-content:space-between;
+  background:#0a0a0a;
+}
+.carousel-dots-m{display:flex;gap:7px;align-items:center;}
+.cm-dot{
+  width:22px;height:3px;background:#2a2a2a;
+  cursor:pointer;transition:background .2s,width .3s;
+}
+.cm-dot.active{width:44px;background:var(--blue);}
+.cm-arrows{display:flex;gap:8px;}
+.cm-arrow{
+  width:36px;height:36px;border:1px solid #2a2a2a;
+  background:transparent;color:#555;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:border-color .2s,color .2s;
+}
+.cm-arrow:hover{border-color:var(--blue);color:var(--blue);}
+.cm-arrow svg{width:14px;height:14px;}
+.cm-counter{font-size:10px;color:#444;letter-spacing:2px;font-weight:600;}
+
+/* ── SHOW/HIDE logic ── */
+@media(max-width:767px){
+  /* Hide desktop flip grid */
+  .bonuses-grid{display:none!important;}
+  /* Show carousel */
+  .bonus-carousel-wrap{display:block!important;}
+}
+@media(min-width:768px){
+  /* Show desktop flip grid */
+  .bonuses-grid{display:grid!important;}
+  /* Hide carousel */
+  .bonus-carousel-wrap{display:none!important;}
+}
+</style>
+</head>
+<body>
+
+<div style="border:2px solid var(--ink);margin:0;padding:0;">
+
+<!-- ═══════════════════════════
+     SECTION 1 — HERO
+═══════════════════════════ -->
+<section style="overflow:hidden;">
+  <div class="hero">
+    <div style="display:flex!important;flex-direction:column!important;min-width:0;overflow:hidden;">
+      <!-- TICKER -->
+      <div class="ticker">
+        <div class="ticker-inner">
+          <div class="ti live"><span class="ti-dot"></span>Live Masterclass</div>
+          <div class="ti"><span class="ti-dot"></span>October 15, 2025</div>
+          <div class="ti"><span class="ti-dot"></span>7:00 PM &ndash; 9:00 PM EDT</div>
+          <div class="ti spots"><span class="ti-dot"></span><strong>Only 47 Spots Remaining</strong></div>
+          <div class="ti"><span class="ti-dot"></span>Free Enrollment</div>
+          <div class="ti"><span class="ti-dot"></span>94% First-Attempt Pass Rate</div>
+          <div class="ti"><span class="ti-dot"></span>No Books Required</div>
+          <div class="ti"><span class="ti-dot"></span>50,000+ Students Trained</div>
+          <div class="ti live"><span class="ti-dot"></span>Live Masterclass</div>
+          <div class="ti"><span class="ti-dot"></span>October 15, 2025</div>
+          <div class="ti"><span class="ti-dot"></span>7:00 PM &ndash; 9:00 PM EDT</div>
+          <div class="ti spots"><span class="ti-dot"></span><strong>Only 47 Spots Remaining</strong></div>
+          <div class="ti"><span class="ti-dot"></span>Free Enrollment</div>
+          <div class="ti"><span class="ti-dot"></span>94% First-Attempt Pass Rate</div>
+          <div class="ti"><span class="ti-dot"></span>No Books Required</div>
+          <div class="ti"><span class="ti-dot"></span>50,000+ Students Trained</div>
+        </div>
+      </div>
+      <!-- REVIEW TICKER
+           ═══════════════════════════════════════════════════════════════
+           HOW IT WORKS:
+           1. On page load, fetchReviews() calls your API
+           2. Reviews are injected into #review-ticker-inner
+           3. The set is duplicated for seamless infinite loop
+           4. Ticker pauses on hover so users can read
+           5. If API fails, FALLBACK_REVIEWS are used instead
+
+           YOUR API INTEGRATION:
+           - Set REVIEWS_API_URL to your endpoint (line ~10 in script)
+           - Your API should return JSON: { reviews: [ { text, author, rating }, ... ] }
+           - rating is a number 1–5
+           - text should be short (under 60 chars ideally for the strip)
+           - author is a first name + last initial e.g. "Rajesh M."
+
+           SPEED CONTROL:
+           - TICKER_SPEED_PX_PER_SEC controls how fast it scrolls (default 80)
+           - Lower = slower, higher = faster
+           ═══════════════════════════════════════════════════════════════ -->
+      <div class="review-ticker" id="review-ticker">
+        <div class="review-ticker-inner" id="review-ticker-inner">
+          <div class="rt-loading">Loading reviews&hellip;</div>
+        </div>
+      </div>
+      <!-- INK STRIP -->
+      <div class="ink-strip">
+        <span class="is-left">Free Live Training &middot; Limited to 100 Seats</span>
+        <div class="is-right"><span class="is-dot"></span>Registration Open</div>
+      </div>
+      <!-- DATE + COUNTDOWN -->
+      <div class="date-unit">
+        <div class="date-col">
+          <div class="date-kicker">Live Masterclass</div>
+          <div class="date-main">October 15, 2025</div>
+          <div class="date-time"><span class="date-time-bullet"></span>7:00 PM &ndash; 9:00 PM EDT</div>
+        </div>
+        <div class="badge-47">47 left</div>
+        <div class="date-sep"></div>
+        <div class="timer-right">
+          <div class="timer-label">Closes In</div>
+          <div class="timer">
+            <div class="tc"><div class="tn" id="h-d">02</div><div class="tl">Days</div></div>
+            <div class="tsep">:</div>
+            <div class="tc"><div class="tn" id="h-h">14</div><div class="tl">Hrs</div></div>
+            <div class="tsep">:</div>
+            <div class="tc"><div class="tn" id="h-m">37</div><div class="tl">Min</div></div>
+            <div class="tsep">:</div>
+            <div class="tc"><div class="tn" id="h-s">22</div><div class="tl">Sec</div></div>
+          </div>
+        </div>
+      </div>
+      <!-- COPY -->
+      <div class="hero-copy">
+        <div>
+          <div class="copy-kicker">No Books Required &middot; Case-Based Method</div>
+          <h1 class="copy-hl"><em>PMP Certified</em><strong>Without Reading<br>A Single Book</strong></h1>
+          <div class="copy-divider"></div>
+          <p class="copy-deck">In less than 30 days &mdash; our proprietary case-based approach has helped 50,000+ professionals pass on their very first attempt.</p>
+        </div>
+        <div>
+          <div class="hero-stats" style="grid-template-columns:repeat(4,1fr)!important;">
+            <div class="hero-stat"><div class="hero-stat-num">1000+</div><div class="hero-stat-lbl">Bootcamps delivered</div></div>
+            <div class="hero-stat"><div class="hero-stat-num" style="font-size:16px;">1,80,000+</div><div class="hero-stat-lbl">Learners &amp; followers</div></div>
+            <!-- Google rating -->
+            <a href="https://www.google.com/maps/place/EduHubSpot/@41.0702508,-73.5560947,17z/data=!4m8!3m7!1s0x89c2a117b84e43bb:0x1f52d2135608ebba!8m2!3d41.0702509!4d-73.5512238!9m1!1b1!16s%2Fg%2F11t7s9mmhl?entry=ttu&g_ep=EgoyMDI2MDQxNS4wIKXMDSoASAFQAw%3D%3D"
+               target="_blank" rel="noopener" class="hero-stat hero-stat-platform" style="text-decoration:none;cursor:pointer;">
+              <div class="hero-stat-platform-top">
+                <svg width="14" height="14" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
+                  <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57C21.36 18.19 22.56 15.37 22.56 12.25z" fill="#4285F4"/>
+                  <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                  <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+                  <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                </svg>
+                <div class="hero-stat-num" style="font-size:16px;">4.9&#9733;</div>
+              </div>
+              <div class="hero-stat-lbl">Google Reviews</div>
+            </a>
+            <!-- Trustpilot rating -->
+            <a href="https://www.trustpilot.com/review/eduhubspot.com"
+               target="_blank" rel="noopener" class="hero-stat hero-stat-platform" style="text-decoration:none;cursor:pointer;">
+              <div class="hero-stat-platform-top">
+                <svg width="14" height="14" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
+                  <path d="M12 0L14.59 8.41H23.51L16.46 13.59L19.05 22L12 16.82L4.95 22L7.54 13.59L0.49 8.41H9.41L12 0Z" fill="#00B67A"/>
+                  <path d="M16.69 15.36L16.04 13.59L12 16.82L16.69 15.36Z" fill="#005128"/>
+                </svg>
+                <div class="hero-stat-num" style="font-size:16px;">4.9&#9733;</div>
+              </div>
+              <div class="hero-stat-lbl">Trustpilot Reviews</div>
+            </a>
+          </div>
+          <div class="hero-cta-row">
+            <a href="#" class="btn-reserve">Reserve My Spot <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
+            <span class="hero-trust">Trusted by 50,000+ globally</span>
+          </div>
+          <div class="spots-line"><span class="spots-pulse"></span>Only <strong>&nbsp;47 spots remaining&nbsp;</strong> &mdash; limited to first 100 registrants</div>
+        </div>
+      </div>
+    </div>
+    <!-- IMAGE -->
+    <div class="hero-right">
+      <div class="right-grid"></div>
+      <div class="right-header">The Ultimate PMP Prep Masterclass</div>
+      <img src="images/instructor.webp" alt="PMP Instructor" class="hero-img" onerror="this.style.display='none'">
+      <div class="img-ph">INSTRUCTOR PHOTO</div>
+      <div class="fc fc-spots"><div class="fc-num">47</div><div class="fc-lbl">Spots remaining</div></div>
+
+      <!-- PLATFORM REVIEW LINKS -->
+      <div class="hero-platforms">
+        <!-- Google Reviews -->
+        <a href="https://www.google.com/maps/place/EduHubSpot/@41.0702508,-73.5560947,17z/data=!4m8!3m7!1s0x89c2a117b84e43bb:0x1f52d2135608ebba!8m2!3d41.0702509!4d-73.5512238!9m1!1b1!16s%2Fg%2F11t7s9mmhl?entry=ttu&g_ep=EgoyMDI2MDQxNS4wIKXMDSoASAFQAw%3D%3D"
+           target="_blank" rel="noopener" class="platform-link">
+          <svg class="platform-link-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57C21.36 18.19 22.56 15.37 22.56 12.25z" fill="#4285F4"/>
+            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+          </svg>
+          <div class="platform-link-text">
+            <span class="platform-link-label">Rated on Google</span>
+            <span class="platform-link-name">4.9 / 5.0</span>
+            <div class="platform-link-stars">
+              <div class="platform-link-star"></div><div class="platform-link-star"></div>
+              <div class="platform-link-star"></div><div class="platform-link-star"></div>
+              <div class="platform-link-star h"></div>
+            </div>
+            <span class="platform-link-count">1,200+ reviews</span>
+          </div>
+        </a>
+        <!-- Trustpilot Reviews -->
+        <a href="https://www.trustpilot.com/review/eduhubspot.com"
+           target="_blank" rel="noopener" class="platform-link">
+          <svg class="platform-link-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 0L14.59 8.41H23.51L16.46 13.59L19.05 22L12 16.82L4.95 22L7.54 13.59L0.49 8.41H9.41L12 0Z" fill="#00B67A"/>
+            <path d="M16.69 15.36L16.04 13.59L12 16.82L16.69 15.36Z" fill="#005128"/>
+          </svg>
+          <div class="platform-link-text">
+            <span class="platform-link-label">Rated on Trustpilot</span>
+            <span class="platform-link-name">4.9 / 5.0</span>
+            <div class="platform-link-stars">
+              <div class="platform-link-star"></div><div class="platform-link-star"></div>
+              <div class="platform-link-star"></div><div class="platform-link-star"></div>
+              <div class="platform-link-star h"></div>
+            </div>
+            <span class="platform-link-count">1,600+ reviews</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════
+     SECTION 2 — WHAT YOU'LL LEARN
+═══════════════════════════ -->
+<section class="learn" style="border-top:1px solid var(--ink);">
+  <div class="learn-top">
+    <span class="learn-top-l">6 Techniques That Passed 50,000+ Students &middot; Zero Textbooks &middot; All Case-Based</span>
+    <div class="learn-top-r"><span class="learn-dot"></span><span class="learn-top-txt">Live &middot; Oct 15, 2025 &middot; 94% Pass Rate</span></div>
+  </div>
+  <div class="learn-head">
+    <h2 class="learn-hl">What You'll <em>Walk Away With</em></h2>
+    <a href="#" class="learn-head-cta">Reserve My Spot →</a>
+  </div>
+  <div class="learn-grid">
+    <div class="b2-card"><div class="b2-chip">94%</div><div class="b2-num">01</div><div class="b2-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/></svg></div><div class="b2-title">PMP Exam Structure</div><div class="b2-foot"><span class="b2-tag">Foundation</span><span class="b2-arr">→</span></div></div>
+    <div class="b2-card"><div class="b2-chip">50k+</div><div class="b2-num">02</div><div class="b2-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div><div class="b2-title">Unchartered Mind Technique</div><div class="b2-foot"><span class="b2-tag">Secret #1</span><span class="b2-arr">→</span></div></div>
+    <div class="b2-card"><div class="b2-chip">#1 fail</div><div class="b2-num">03</div><div class="b2-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div><div class="b2-title">Mind Benders Technique</div><div class="b2-foot"><span class="b2-tag">Secret #2</span><span class="b2-arr">→</span></div></div>
+    <div class="b2-card"><div class="b2-chip">30 days</div><div class="b2-num">04</div><div class="b2-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div class="b2-title">Neil Armstrong Technique</div><div class="b2-foot"><span class="b2-tag">Secret #3</span><span class="b2-arr">→</span></div></div>
+    <div class="b2-card"><div class="b2-chip">0 books</div><div class="b2-num">05</div><div class="b2-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg></div><div class="b2-title">Case-Based Approach</div><div class="b2-foot"><span class="b2-tag">No Books</span><span class="b2-arr">→</span></div></div>
+    <div class="b2-card"><div class="b2-chip">4.9★</div><div class="b2-num">06</div><div class="b2-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><div class="b2-title">Einstein Technique</div><div class="b2-foot"><span class="b2-tag">Secret #4</span><span class="b2-arr">→</span></div></div>
+  </div>
+  <div class="learn-footer">
+    <span class="learn-footer-txt">6 proven techniques &middot; 50,000+ successful students</span>
+    <a href="#" class="btn-reserve btn-reserve-dark">Reserve My Spot <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════
+     SECTION 3 — 3 BONUSES
+═══════════════════════════ -->
+<section class="bonuses" style="border-top:1px solid var(--ink);">
+  <div class="bonuses-top">
+    <span class="bonuses-top-l">Stay 90 Minutes &middot; October 15, 2025 &middot; Unlock All 3 Bonuses &middot; Value Over $150 &middot; Yours Free</span>
+    <div class="bonuses-top-r"><span class="bonuses-dot"></span>Free &middot; Exclusive</div>
+  </div>
+  <div class="bonuses-head">
+    <h2 class="bonuses-hl">You Also Get <em>3 Free Bonuses</em></h2>
+    <div class="bonuses-head-sub">Hover each card to flip and see what's inside.</div>
+  </div>
+  <div class="bonuses-grid">
+    <div class="flip"><div class="flip-inner">
+      <div class="flip-front"><div class="front-tag">Bonus #1</div><div class="front-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4M7 8h10M7 11h6"/></svg></div><div class="front-title">ECO (Exam Content Outline) Tool</div><div class="front-sub">Review the entire PMP syllabus &mdash; free.</div><div class="front-foot"><span class="front-hint">Hover to flip</span><span class="front-arr">→</span></div></div>
+      <div class="flip-back"><div><div class="back-tag">Bonus #1 &middot; Free Tool</div><div class="back-title">ECO Tool</div><div class="back-body">PMP Exam is based on ECO &mdash; not PMBOK. Review the entire PMP syllabus with this free tool and know exactly what gets tested.</div></div><div><div class="back-divider"></div><div class="back-val">Value $49 &middot; Yours Free</div></div></div>
+    </div></div>
+    <div class="flip"><div class="flip-inner">
+      <div class="flip-front"><div class="front-tag">Bonus #2</div><div class="front-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M12 14v7M9 18h6"/></svg></div><div class="front-title">PMI-PMP Mindset Tool</div><div class="front-sub">Develop the right PMI mindset.</div><div class="front-foot"><span class="front-hint">Hover to flip</span><span class="front-arr">→</span></div></div>
+      <div class="flip-back"><div><div class="back-tag">Bonus #2 &middot; Exclusive</div><div class="back-title">PMI-PMP Mindset Tool</div><div class="back-body">Develop the exact PMI mindset needed to approach every question correctly. Mindset &mdash; not knowledge &mdash; is what separates pass from fail.</div></div><div><div class="back-divider"></div><div class="back-val">Exclusive &middot; Yours Free</div></div></div>
+    </div></div>
+    <div class="flip"><div class="flip-inner">
+      <div class="flip-front"><div class="front-tag">Bonus #3</div><div class="front-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12V22H4V12"/><path d="M22 7H2v5h20V7z"/><path d="M12 22V7M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg></div><div class="front-title">Secret Surprise</div><div class="front-sub">Stay 90 mins to unlock.</div><div class="front-foot"><span class="front-hint">Hover to flip</span><span class="front-arr">→</span></div></div>
+      <div class="flip-back"><div><div class="back-tag">Bonus #3 &middot; Live Only</div><div class="back-title">Secret Surprise</div><div class="back-body">Sit for the complete 90 minutes and unlock this secret &mdash; revealed live only to attendees who stay till the end.</div></div><div><div class="back-divider"></div><div class="back-val">Live Only &middot; Exclusive</div></div></div>
+    </div></div>
+  </div>
+  
+  <!-- ═══ MOBILE CAROUSEL (shown on mobile only via CSS) ═══ -->
+  <div class="bonus-carousel-wrap" id="bonusCarousel">
+    <div class="carousel-progress"><div class="carousel-progress-fill" id="bprog"></div></div>
+    <div class="carousel-track" id="btrack">
+
+      <div class="bonus-card-m bcm-card-active">
+        <div class="bcm-top">
+          <div class="bcm-icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4M7 8h10M7 11h6"/></svg>
+          </div>
+          <div class="bcm-top-text">
+            <div class="bcm-tag">Bonus #1</div>
+            <div class="bcm-title-sm">ECO Tool</div>
+          </div>
+        </div>
+        <div class="bcm-body">
+          <div class="bcm-body-tag">Bonus #1 · Free Tool</div>
+          <div class="bcm-body-title">ECO (Exam Content Outline) Tool</div>
+          <div class="bcm-body-text">PMP Exam is based on ECO — <strong>not PMBOK.</strong> Review the entire PMP syllabus with this free tool and know exactly what gets tested before you walk in.</div>
+          <div class="bcm-footer"><div class="bcm-val">Value $49 · Yours Free →</div><div class="bcm-unlock">Stay 90 mins</div></div>
+        </div>
+      </div>
+
+      <div class="bonus-card-m">
+        <div class="bcm-top">
+          <div class="bcm-icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M12 14v7M9 18h6"/></svg>
+          </div>
+          <div class="bcm-top-text">
+            <div class="bcm-tag">Bonus #2</div>
+            <div class="bcm-title-sm">Mindset Tool</div>
+          </div>
+        </div>
+        <div class="bcm-body">
+          <div class="bcm-body-tag">Bonus #2 · Exclusive</div>
+          <div class="bcm-body-title">PMI-PMP Mindset Tool</div>
+          <div class="bcm-body-text">Develop the exact PMI mindset to approach every question correctly. <strong>The difference between pass and fail is often mindset — not knowledge.</strong></div>
+          <div class="bcm-footer"><div class="bcm-val">Exclusive · Yours Free →</div><div class="bcm-unlock">Stay 90 mins</div></div>
+        </div>
+      </div>
+
+      <div class="bonus-card-m">
+        <div class="bcm-top">
+          <div class="bcm-icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12V22H4V12"/><path d="M22 7H2v5h20V7z"/><path d="M12 22V7M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+          </div>
+          <div class="bcm-top-text">
+            <div class="bcm-tag">Bonus #3</div>
+            <div class="bcm-title-sm">Secret Surprise</div>
+          </div>
+        </div>
+        <div class="bcm-body">
+          <div class="bcm-body-tag">Bonus #3 · Live Only</div>
+          <div class="bcm-body-title">Secret Surprise</div>
+          <div class="bcm-body-text">Sit for the complete 90 minutes and unlock this — <strong>revealed live only to attendees who stay till the very end.</strong></div>
+          <div class="bcm-footer"><div class="bcm-val">Live Only · Exclusive →</div><div class="bcm-unlock">Stay 90 mins</div></div>
+        </div>
+      </div>
+
+    </div>
+    <div class="carousel-controls-m">
+      <div class="carousel-dots-m">
+        <div class="cm-dot active" data-bidx="0"></div>
+        <div class="cm-dot" data-bidx="1"></div>
+        <div class="cm-dot" data-bidx="2"></div>
+      </div>
+      <div class="cm-counter"><span id="bcur">1</span> / 3</div>
+      <div class="cm-arrows">
+        <button class="cm-arrow" id="bprev" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+        <button class="cm-arrow" id="bnext" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+      </div>
+    </div>
+  </div>
+
+<div class="bonuses-footer">
+    <span class="bonuses-ft">Stay for the complete 90 minutes to unlock all three</span>
+    <a href="#" class="btn-reserve">Reserve My Spot <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════
+     SECTION 4 — WHO IS THIS FOR
+═══════════════════════════ -->
+<section class="whosfor" style="border-top:1px solid var(--ink);">
+
+  <div class="wf-head">
+    <h2 class="wf-hl">Is This <em>For You?</em></h2>
+    <div class="wf-head-note">Four profiles. If even one sounds like you — this seat is yours.</div>
+  </div>
+  <div class="wf-grid">
+    <div class="wf-card"><div class="wf-stat">78%</div><div class="wf-stat-sub">of our students</div><div class="wf-type">Learning Style</div><div class="wf-quote">"I hate reading textbooks. I need to see it to understand it."</div><div class="wf-body">Our case-based approach replaced 500 pages of PMBOK. Zero textbooks required.</div><div class="wf-foot"><span class="wf-tag">Visual Learner</span><span class="wf-arr">→</span></div></div>
+    <div class="wf-card"><div class="wf-stat">64%</div><div class="wf-stat-sub">of our students</div><div class="wf-type">Schedule</div><div class="wf-quote">"By 6 PM I'm exhausted. I have no energy left to study."</div><div class="wf-body">64% were full-time professionals. Two focused hours was enough to pass.</div><div class="wf-foot"><span class="wf-tag">Busy Professional</span><span class="wf-arr">→</span></div></div>
+    <div class="wf-card"><div class="wf-stat">71%</div><div class="wf-stat-sub">of our students</div><div class="wf-type">Experience</div><div class="wf-quote">"I'd never done Agile. I thought that would fail me."</div><div class="wf-body">71% had zero Agile experience. We start from scratch — no jargon needed.</div><div class="wf-foot"><span class="wf-tag">No Agile Background</span><span class="wf-arr">→</span></div></div>
+    <div class="wf-card"><div class="wf-stat">83%</div><div class="wf-stat-sub">of our students</div><div class="wf-type">Application</div><div class="wf-quote">"The application form stopped me before I started."</div><div class="wf-body">83% felt overwhelmed. We walk through the application step by step.</div><div class="wf-foot"><span class="wf-tag">Scared of Application</span><span class="wf-arr">→</span></div></div>
+  </div>
+  <div class="wf-footer">
+    <span class="wf-ft">If even one of these sounds like you — this masterclass is for you</span>
+    <a href="#" class="btn-reserve btn-reserve-dark">Reserve My Spot <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════
+     SECTION 5 — FINAL CTA
+═══════════════════════════ -->
+<section class="final-cta" style="border-top:2px solid var(--ink);">
+  <div class="fc-strip">
+    <span class="fc-strip-l">Final Call &middot; PMP Masterclass &middot; October 15, 2025</span>
+    <div class="fc-strip-r"><span class="fc-strip-dot"></span>Registration Closing</div>
+  </div>
+  <div class="fc-body">
+    <div class="fc-left">
+      <div class="fc-kicker"><span class="fc-kicker-dot"></span>Registration Closing</div>
+      <h2 class="fc-hl">Register Before<br>Spots Fill Up</h2>
+      <div class="fc-sub">Limited to the first <strong>100 professionals.</strong><br><strong>47 spots remaining</strong> &mdash; don't miss your seat.</div>
+    </div>
+    <div class="fc-sep"></div>
+    <div class="fc-right">
+      <div>
+        <div class="fc-timer-label">Registration closes in</div>
+        <div class="fc-timer">
+          <div class="fc-tc"><div class="fc-tn" id="f-d">02</div><div class="fc-tl">Days</div></div>
+          <div class="fc-tsep">:</div>
+          <div class="fc-tc"><div class="fc-tn" id="f-h">14</div><div class="fc-tl">Hrs</div></div>
+          <div class="fc-tsep">:</div>
+          <div class="fc-tc"><div class="fc-tn" id="f-m">37</div><div class="fc-tl">Min</div></div>
+          <div class="fc-tsep">:</div>
+          <div class="fc-tc"><div class="fc-tn" id="f-s">22</div><div class="fc-tl">Sec</div></div>
+        </div>
+      </div>
+      <div class="fc-cta-row">
+        <a href="#" class="btn-reserve">Reserve My Spot <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
+        <div class="fc-spots"><span class="fc-spots-dot"></span>Only <strong>&nbsp;47&nbsp;</strong> spots left</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════════
+   CONFIGURATION — edit these values to match your setup
+═══════════════════════════════════════════════════════════════════ */
+const REVIEWS_API_URL  = 'https://your-api.com/api/reviews';  // ← YOUR API ENDPOINT
+const TICKER_SPEED_PX_PER_SEC = 80;   // scroll speed (px/sec). Lower = slower
+const MAX_REVIEWS      = 20;          // max reviews to show in ticker
+const TICKER_ANIMATION_NAME = 'scrolltick'; // must match CSS @keyframes name
+
+/* ── FALLBACK REVIEWS (shown if API fails or during development) ── */
+const FALLBACK_REVIEWS = [
+  { text: "Passed first attempt. No Agile background at all.",             author: "Rajesh M.",  rating: 5, source: "google"      },
+  { text: "Best 2 hours I have spent on my career.",                       author: "Priya K.",   rating: 5, source: "trustpilot"  },
+  { text: "Cleared in 30 days. Zero textbooks.",                           author: "Ahmed S.",   rating: 5, source: "google"      },
+  { text: "The mindset technique changed everything for me.",              author: "Sunita R.",  rating: 5, source: "trustpilot"  },
+  { text: "Terrified of the application. They walked me through it.",      author: "James T.",   rating: 5, source: "google"      },
+  { text: "Passed on my first try after failing twice before.",            author: "Meera L.",   rating: 5, source: "trustpilot"  },
+  { text: "Never done Agile. Did not matter at all.",                      author: "Carlos V.",  rating: 5, source: "google"      },
+  { text: "The case-based method clicked immediately.",                    author: "Fatima A.",  rating: 5, source: "trustpilot"  },
+  { text: "Worth every minute. Got certified in under 6 weeks.",           author: "David O.",   rating: 5, source: "google"      },
+  { text: "Could not study after work. 2 hours was all I needed.",         author: "Neha P.",    rating: 5, source: "trustpilot"  },
+];
+
+/* ═══════════════════════════════════════════════════════════════════
+   REVIEW TICKER ENGINE — no need to edit below this line
+═══════════════════════════════════════════════════════════════════ */
+
+/* ─────────────────────────────────────────────────────
+   PLATFORM SVG ICONS — inline, no external deps
+───────────────────────────────────────────────────── */
+const PLATFORM_ICONS = {
+  google: '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="16" height="16" style="flex-shrink:0"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57C21.36 18.19 22.56 15.37 22.56 12.25z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>',
+  trustpilot: '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="16" height="16" style="flex-shrink:0"><path d="M12 0L14.59 8.41H23.51L16.46 13.59L19.05 22L12 16.82L4.95 22L7.54 13.59L0.49 8.41H9.41L12 0Z" fill="#00B67A"/><path d="M16.69 15.36L16.04 13.59L12 16.82L16.69 15.36Z" fill="#005128"/></svg>'
+};
+
+/**
+ * Builds a single ticker item from a review object
+ * @param {{ text: string, author: string, rating: number, source: 'google'|'trustpilot' }} review
+ * @returns {HTMLElement}
+ */
+function buildReviewItem(review) {
+  const item = document.createElement('div');
+  item.className = 'rt-item';
+
+  // Platform badge
+  const source = (review.source || 'google').toLowerCase();
+  const platformName = source === 'trustpilot' ? 'Trustpilot' : 'Google';
+
+  const platform = document.createElement('div');
+  platform.className = 'rt-platform ' + source;
+  platform.innerHTML = (PLATFORM_ICONS[source] || PLATFORM_ICONS.google) +
+    '<span class="rt-platform-name">' + platformName + '</span>';
+
+  // Divider
+  const divider = document.createElement('div');
+  divider.className = 'rt-divider';
+
+  // Stars
+  const stars = document.createElement('div');
+  stars.className = 'rt-stars';
+  const count = Math.min(5, Math.max(1, Math.round(review.rating || 5)));
+  for (let i = 0; i < 5; i++) {
+    const star = document.createElement('div');
+    star.className = 'rt-star';
+    if (i >= count) star.style.background = '#333';
+    stars.appendChild(star);
+  }
+
+  // Text
+  const text = document.createElement('span');
+  text.className = 'rt-text';
+  text.textContent = '“' + review.text + '”';
+
+  // Author
+  const author = document.createElement('span');
+  author.className = 'rt-author';
+  author.textContent = '— ' + review.author;
+
+  item.appendChild(platform);
+  item.appendChild(divider);
+  item.appendChild(stars);
+  item.appendChild(text);
+  item.appendChild(author);
+  return item;
+}
+
+/**
+ * Populates the ticker with reviews and sets scroll speed
+ * @param {Array} reviews
+ */
+function populateTicker(reviews) {
+  const inner = document.getElementById('review-ticker-inner');
+  if (!inner) return;
+
+  // Clear loading state
+  inner.innerHTML = '';
+
+  // Clamp to max
+  const set = reviews.slice(0, MAX_REVIEWS);
+
+  // Build items — duplicate set for seamless loop
+  [...set, ...set].forEach(review => {
+    inner.appendChild(buildReviewItem(review));
+  });
+
+  // Calculate scroll duration based on content width + speed
+  // We do this after a short delay to let DOM paint
+  requestAnimationFrame(() => {
+    const totalWidth = inner.scrollWidth / 2; // half because duplicated
+    const duration = Math.round(totalWidth / TICKER_SPEED_PX_PER_SEC);
+
+    // Inject a keyframe-matched duration
+    inner.style.animationDuration = duration + 's';
+    inner.style.animationName = TICKER_ANIMATION_NAME;
+    inner.style.animationTimingFunction = 'linear';
+    inner.style.animationIterationCount = 'infinite';
+  });
+}
+
+/**
+ * Fetches reviews from your API with a fallback
+ * EXPECTED API RESPONSE FORMAT:
+ * {
+ *   "reviews": [
+ *     { "text": "Short review text", "author": "Name I.", "rating": 5, "source": "google" },
+ *     { "text": "Another review",    "author": "Name J.", "rating": 5, "source": "trustpilot" },
+ *     ...
+ *   ]
+ * }
+ *
+ * "source" field: "google" or "trustpilot" (defaults to "google" if missing)
+ * Mix both sources freely — the ticker handles each platform's icon automatically
+ */
+async function fetchReviews() {
+  try {
+    const res = await fetch(REVIEWS_API_URL, {
+      method: 'GET',
+      headers: { 'Accept': 'application/json' },
+      // Add auth headers here if your API requires them:
+      // 'Authorization': 'Bearer YOUR_TOKEN'
+    });
+
+    if (!res.ok) throw new Error('API returned ' + res.status);
+
+    const data = await res.json();
+
+    // Validate response shape
+    if (!data.reviews || !Array.isArray(data.reviews) || data.reviews.length === 0) {
+      throw new Error('Invalid response shape — expected { reviews: [...] }');
+    }
+
+    console.log('[ReviewTicker] Loaded', data.reviews.length, 'reviews from API');
+    populateTicker(data.reviews);
+
+  } catch (err) {
+    console.warn('[ReviewTicker] API failed, using fallback reviews:', err.message);
+    populateTicker(FALLBACK_REVIEWS);
+  }
+}
+
+/* ── COUNTDOWN TIMER ── */
+const target = new Date('2025-10-15T19:00:00-04:00');
+function tick(){
+  const diff = Math.max(0,Math.floor((target-new Date())/1000));
+  const d=Math.floor(diff/86400),h=Math.floor((diff%86400)/3600),m=Math.floor((diff%3600)/60),s=diff%60;
+  const f=n=>String(n).padStart(2,'0');
+  [['h-d','h-h','h-m','h-s'],['f-d','f-h','f-m','f-s']].forEach(([di,hi,mi,si])=>{
+    const de=document.getElementById(di);
+    if(de){de.textContent=f(d);document.getElementById(hi).textContent=f(h);document.getElementById(mi).textContent=f(m);document.getElementById(si).textContent=f(s);}
+  });
+}
+tick();
+setInterval(tick,1000);
+
+/* ── INIT ── */
+fetchReviews();
+
+/* ══ BONUS CAROUSEL JS ══ */
+(function(){
+  var TOTAL=3,DELAY=4000;
+  var btrack=document.getElementById('btrack');
+  var bprog=document.getElementById('bprog');
+  var bcur=document.getElementById('bcur');
+  if(!btrack)return;
+  var bdots=document.querySelectorAll('.cm-dot');
+  var bcards=document.querySelectorAll('.bonus-card-m');
+  var bstage=document.getElementById('bonusCarousel');
+  var cur=0,btimer=null,paused=false;
+
+  function goTo(idx,fromUser){
+    if(fromUser){bpause();setTimeout(bresume,6000);}
+    bcards[cur].classList.remove('bcm-card-active');
+    bdots[cur].classList.remove('active');
+    cur=((idx%TOTAL)+TOTAL)%TOTAL;
+    bcards[cur].classList.add('bcm-card-active');
+    bdots[cur].classList.add('active');
+    btrack.style.transform='translateX(-'+cur*100+'%)';
+    bcur.textContent=cur+1;
+    resetProg();
+  }
+  function resetProg(){
+    clearInterval(btimer);
+    bprog.style.transition='none';
+    bprog.style.width='0%';
+    if(!paused){
+      requestAnimationFrame(function(){
+        bprog.style.transition='width '+DELAY+'ms linear';
+        bprog.style.width='100%';
+      });
+    }
+  }
+  function startAuto(){
+    clearInterval(btimer);
+    btimer=setInterval(function(){if(!paused)goTo(cur+1);},DELAY);
+  }
+  function bpause(){
+    paused=true;clearInterval(btimer);
+    bprog.style.transition='none';
+    bprog.style.width=getComputedStyle(bprog).width;
+  }
+  function bresume(){paused=false;resetProg();startAuto();}
+
+  /* Touch */
+  var tx=0,dragging=false;
+  bstage.addEventListener('touchstart',function(e){tx=e.touches[0].clientX;bpause();},{passive:true});
+  bstage.addEventListener('touchmove',function(e){
+    var dx=e.touches[0].clientX-tx;
+    if(Math.abs(dx)>8){
+      dragging=true;
+      btrack.style.transition='none';
+      btrack.style.transform='translateX('+(-(cur*100)+(dx/bstage.offsetWidth)*100)+'%)';
+    }
+  },{passive:true});
+  bstage.addEventListener('touchend',function(e){
+    var dx=e.changedTouches[0].clientX-tx;
+    btrack.style.transition='transform .55s cubic-bezier(.4,0,.2,1)';
+    if(dragging){dx<-50?goTo(cur+1,true):dx>50?goTo(cur-1,true):goTo(cur);}
+    dragging=false;setTimeout(bresume,5000);
+  },{passive:true});
+
+  /* Buttons + dots */
+  document.getElementById('bprev').addEventListener('click',function(){goTo(cur-1,true);});
+  document.getElementById('bnext').addEventListener('click',function(){goTo(cur+1,true);});
+  bdots.forEach(function(d){d.addEventListener('click',function(){goTo(parseInt(d.dataset.bidx),true);});});
+
+  /* Hover */
+  bstage.addEventListener('mouseenter',bpause);
+  bstage.addEventListener('mouseleave',bresume);
+
+  goTo(0);startAuto();
+})();
+
+</script>
+
+<!-- ═══════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════ -->
+<footer>
+
+  <!-- Top — Brand story, not urgency -->
+  <div class="footer-top">
+    <div class="footer-top-left">
+      <div class="footer-kicker"><span class="footer-kicker-dot"></span>Trusted by 1,80,000+ Learners</div>
+      <h2 class="footer-hl">Your Career Deserves<br><em>The Right Shortcut.</em></h2>
+      <div class="footer-sub">
+        A community of <strong>1,80,000+ learners and followers</strong> trust EduHubSpot to accelerate their careers — across PMP, CAPM, Gen AI, Agentic AI, DevOps, Analytics and more.<br>
+        Join us live on <strong>October 15, 2025</strong> and see exactly how.
+      </div>
+    </div>
+    <div class="footer-top-right">
+      <a href="#" class="footer-btn">Join the Free Masterclass →</a>
+      <div class="footer-spots"><span class="footer-spots-dot"></span>Free to attend &middot; <strong>47 spots remaining</strong></div>
+    </div>
+  </div>
+
+  <!-- Running info ticker -->
+  <div class="footer-ticker">
+    <div class="footer-ticker-inner">
+      <div class="ft-item"><span class="ft-dot"></span>6 Proven Techniques · Zero Textbooks</div>
+      <div class="ft-item accent"><span class="ft-dot"></span>94% First-Attempt Pass Rate</div>
+      <div class="ft-item"><span class="ft-dot"></span>PMP Exam Structure · The Foundation</div>
+      <div class="ft-item"><span class="ft-dot"></span>Unchartered Mind Technique · Secret #1</div>
+      <div class="ft-item accent"><span class="ft-dot"></span>50,000+ Professionals Certified</div>
+      <div class="ft-item"><span class="ft-dot"></span>Mind Benders Technique · Secret #2</div>
+      <div class="ft-item"><span class="ft-dot"></span>Neil Armstrong Technique · Secret #3</div>
+      <div class="ft-item accent"><span class="ft-dot"></span>1000+ Bootcamps · 1,80,000+ Learners</div>
+      <div class="ft-item"><span class="ft-dot"></span>Case-Based Approach · No PMBOK Needed</div>
+      <div class="ft-item"><span class="ft-dot"></span>Einstein Technique · Secret #4</div>
+      <div class="ft-item accent"><span class="ft-dot"></span>Free Enrollment · October 15, 2025 · 7:00 PM EDT</div>
+      <div class="ft-item"><span class="ft-dot"></span>3 Free Bonuses · Stay 90 Minutes</div>
+      <!-- duplicate for loop -->
+      <div class="ft-item"><span class="ft-dot"></span>6 Proven Techniques · Zero Textbooks</div>
+      <div class="ft-item accent"><span class="ft-dot"></span>94% First-Attempt Pass Rate</div>
+      <div class="ft-item"><span class="ft-dot"></span>PMP Exam Structure · The Foundation</div>
+      <div class="ft-item"><span class="ft-dot"></span>Unchartered Mind Technique · Secret #1</div>
+      <div class="ft-item accent"><span class="ft-dot"></span>50,000+ Professionals Certified</div>
+      <div class="ft-item"><span class="ft-dot"></span>Mind Benders Technique · Secret #2</div>
+      <div class="ft-item"><span class="ft-dot"></span>Neil Armstrong Technique · Secret #3</div>
+      <div class="ft-item accent"><span class="ft-dot"></span>1000+ Bootcamps · 1,80,000+ Learners</div>
+      <div class="ft-item"><span class="ft-dot"></span>Case-Based Approach · No PMBOK Needed</div>
+      <div class="ft-item"><span class="ft-dot"></span>Einstein Technique · Secret #4</div>
+      <div class="ft-item accent"><span class="ft-dot"></span>Free Enrollment · October 15, 2025 · 7:00 PM EDT</div>
+      <div class="ft-item"><span class="ft-dot"></span>3 Free Bonuses · Stay 90 Minutes</div>
+    </div>
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="footer-bottom">
+    <div class="footer-brand">Edu<span>Hub</span>Spot</div>
+    <div class="footer-links">
+      <a href="#" class="footer-link">Privacy Policy</a>
+      <a href="#" class="footer-link">Terms &amp; Conditions</a>
+      <a href="#" class="footer-link">Contact Us</a>
+      <a href="#" class="footer-link">FAQ&apos;s</a>
+      <a href="#" class="footer-link">Refund Policy</a>
+    </div>
+    <div class="footer-right">
+      <div class="footer-social">
+        <a href="https://facebook.com/eduhubspot" target="_blank" rel="noopener">fb</a>
+        <a href="https://instagram.com/eduhubspot" target="_blank" rel="noopener">ig</a>
+        <a href="https://twitter.com/eduhubspot" target="_blank" rel="noopener">tw</a>
+        <a href="https://linkedin.com/company/eduhubspot" target="_blank" rel="noopener">in</a>
+        <a href="https://youtube.com/eduhubspot" target="_blank" rel="noopener">yt</a>
+      </div>
+      <div class="footer-copy">&copy; 2026 EduHubSpot. All rights reserved.</div>
+    </div>
+  </div>
+
+</footer>
+</body>
+</html>
+<!-- THIS MARKER IS TEMPORARY - WILL BE REMOVED -->
