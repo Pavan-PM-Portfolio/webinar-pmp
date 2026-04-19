@@ -154,7 +154,7 @@ body{font-family:var(--body);-webkit-font-smoothing:antialiased;-moz-osx-font-sm
 /* ─────────────────────────────────────────
    SECTION 1: HERO
 ───────────────────────────────────────── */
-.hero{display:grid!important;grid-template-columns:1fr 420px!important;width:100%!important;}
+.hero{display:grid!important;grid-template-columns:420px 1fr!important;width:100%!important;}
 
 /* Ticker */
 .ticker{background:var(--blue)!important;height:40px!important;overflow:hidden!important;display:flex!important;align-items:center!important;border-bottom:2px solid var(--ink)!important;}
@@ -211,7 +211,7 @@ body{font-family:var(--body);-webkit-font-smoothing:antialiased;-moz-osx-font-sm
 .hero-img{width:100%;height:100%;object-fit:cover;object-position:top center;position:absolute;inset:0;z-index:2;}
 .img-ph{position:relative;z-index:3;font-size:11px;color:#bbb;letter-spacing:1px;text-transform:uppercase;padding-bottom:24px;}
 .fc{position:absolute;z-index:10;background:var(--white);border:1px solid var(--border);padding:12px 16px;}
-.fc-spots{top:56px;right:20px;}
+.fc-spots{top:56px;left:20px;}
 .fc-rating{bottom:24px;left:20px;}
 .fc-num{font-size:22px;font-weight:700;color:var(--ink);letter-spacing:-1px;line-height:1;margin-bottom:3px;}
 .fc-lbl{font-size:10px;color:var(--dg);}
@@ -602,7 +602,7 @@ body{font-family:var(--body);-webkit-font-smoothing:antialiased;-moz-osx-font-sm
 .hero-platforms{
   position:absolute;
   bottom:20px;
-  left:16px;
+  right:16px;
   display:flex;
   flex-direction:row;
   gap:10px;
@@ -763,11 +763,7 @@ body{font-family:var(--body);-webkit-font-smoothing:antialiased;-moz-osx-font-sm
 
 /* bonus mobile handled by carousel show/hide */
 
-/* ════════════════════════════════════════════
-   BONUS CAROUSEL — mobile only (< 768px)
-   Desktop uses flip cards (above)
-════════════════════════════════════════════ */
-.bonus-carousel-wrap{display:none;} /* hidden on desktop */
+/* carousel removed */
 
 @keyframes shimmer{0%{left:-100%}100%{left:200%}}
 
@@ -865,30 +861,138 @@ body{font-family:var(--body);-webkit-font-smoothing:antialiased;-moz-osx-font-sm
 .cm-arrow svg{width:14px;height:14px;}
 .cm-counter{font-size:10px;color:#444;letter-spacing:2px;font-weight:600;}
 
-/* ── SHOW/HIDE logic ── */
+
+
+/* ════════════════════════════════════════
+   BONUSES — MOBILE FLIP (tap to flip)
+   Full width stacked cards, tap-enabled
+════════════════════════════════════════ */
 @media(max-width:767px){
-  /* Hide desktop flip grid */
-  .bonuses-grid{display:none!important;}
-  /* Show carousel */
-  .bonus-carousel-wrap{display:block!important;}
+  /* Stack bonuses vertically, full width */
+  .bonuses-grid{
+    grid-template-columns:1fr!important;
+    gap:1px!important;
+  }
+
+  /* Card container — fixed height for flip to work */
+  .flip{
+    height:300px!important;
+    perspective:1000px!important;
+    cursor:pointer!important;
+  }
+
+  /* Keep 3D flip intact */
+  .flip-inner{
+    position:relative!important;
+    width:100%!important;
+    height:100%!important;
+    transform-style:preserve-3d!important;
+    transition:transform .6s cubic-bezier(.4,0,.2,1)!important;
+  }
+
+  /* Tap to flip — JS adds .tapped class */
+  .flip.tapped .flip-inner{
+    transform:rotateY(180deg)!important;
+  }
+
+  /* Both faces fill card */
+  .flip-front,.flip-back{
+    position:absolute!important;
+    inset:0!important;
+    padding:24px 20px!important;
+    display:flex!important;
+    flex-direction:column!important;
+  }
+  .flip-back{
+    transform:rotateY(180deg)!important;
+    backface-visibility:hidden!important;
+    -webkit-backface-visibility:hidden!important;
+  }
+  .flip-front{
+    backface-visibility:hidden!important;
+    -webkit-backface-visibility:hidden!important;
+  }
+
+  /* Tap hint instead of hover hint */
+  .front-hint::before{content:"Tap to flip"!important;}
+  .front-hint{font-size:9px!important;color:#555!important;}
+
+  /* Slightly larger touch target text */
+  .front-title{font-size:16px!important;}
+  .back-title{font-size:17px!important;}
+  .back-body{font-size:12px!important;}
 }
-@media(min-width:768px){
-  /* Show desktop flip grid */
-  .bonuses-grid{display:grid!important;}
-  /* Hide carousel */
-  .bonus-carousel-wrap{display:none!important;}
+
+@media(max-width:375px){
+  .flip{height:280px!important;}
+  .flip-front,.flip-back{padding:20px 16px!important;}
+  .front-title{font-size:15px!important;}
+  .back-title{font-size:15px!important;}
+  .back-body{font-size:11px!important;}
 }
 </style>
 </head>
 <body>
 
-<div style="border:2px solid var(--ink);margin:0;padding:0;">
+<div style="max-width:1280px;margin:0 auto;border:2px solid var(--ink);box-shadow:0 8px 60px rgba(0,0,0,.18);">
 
 <!-- ═══════════════════════════
      SECTION 1 — HERO
 ═══════════════════════════ -->
 <section style="overflow:hidden;">
   <div class="hero">
+
+    <!-- IMAGE -->
+    <div class="hero-right">
+      <div class="right-grid"></div>
+      <div class="right-header">The Ultimate PMP Prep Masterclass</div>
+      <img src="images/instructor.webp" alt="PMP Instructor" class="hero-img" onerror="this.style.display='none'">
+      <div class="img-ph">INSTRUCTOR PHOTO</div>
+      <div class="fc fc-spots"><div class="fc-num">47</div><div class="fc-lbl">Spots remaining</div></div>
+
+      <!-- PLATFORM REVIEW LINKS -->
+      <div class="hero-platforms">
+        <!-- Google Reviews -->
+        <a href="https://www.google.com/maps/place/EduHubSpot/@41.0702508,-73.5560947,17z/data=!4m8!3m7!1s0x89c2a117b84e43bb:0x1f52d2135608ebba!8m2!3d41.0702509!4d-73.5512238!9m1!1b1!16s%2Fg%2F11t7s9mmhl?entry=ttu&g_ep=EgoyMDI2MDQxNS4wIKXMDSoASAFQAw%3D%3D"
+           target="_blank" rel="noopener" class="platform-link">
+          <svg class="platform-link-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57C21.36 18.19 22.56 15.37 22.56 12.25z" fill="#4285F4"/>
+            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+          </svg>
+          <div class="platform-link-text">
+            <span class="platform-link-label">Rated on Google</span>
+            <span class="platform-link-name">4.9 / 5.0</span>
+            <div class="platform-link-stars">
+              <div class="platform-link-star"></div><div class="platform-link-star"></div>
+              <div class="platform-link-star"></div><div class="platform-link-star"></div>
+              <div class="platform-link-star h"></div>
+            </div>
+            <span class="platform-link-count">1,200+ reviews</span>
+          </div>
+        </a>
+        <!-- Trustpilot Reviews -->
+        <a href="https://www.trustpilot.com/review/eduhubspot.com"
+           target="_blank" rel="noopener" class="platform-link">
+          <svg class="platform-link-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 0L14.59 8.41H23.51L16.46 13.59L19.05 22L12 16.82L4.95 22L7.54 13.59L0.49 8.41H9.41L12 0Z" fill="#00B67A"/>
+            <path d="M16.69 15.36L16.04 13.59L12 16.82L16.69 15.36Z" fill="#005128"/>
+          </svg>
+          <div class="platform-link-text">
+            <span class="platform-link-label">Rated on Trustpilot</span>
+            <span class="platform-link-name">4.9 / 5.0</span>
+            <div class="platform-link-stars">
+              <div class="platform-link-star"></div><div class="platform-link-star"></div>
+              <div class="platform-link-star"></div><div class="platform-link-star"></div>
+              <div class="platform-link-star h"></div>
+            </div>
+            <span class="platform-link-count">1,600+ reviews</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
     <div style="display:flex!important;flex-direction:column!important;min-width:0;overflow:hidden;">
       <!-- TICKER -->
       <div class="ticker">
@@ -1010,56 +1114,6 @@ body{font-family:var(--body);-webkit-font-smoothing:antialiased;-moz-osx-font-sm
         </div>
       </div>
     </div>
-    <!-- IMAGE -->
-    <div class="hero-right">
-      <div class="right-grid"></div>
-      <div class="right-header">The Ultimate PMP Prep Masterclass</div>
-      <img src="images/instructor.webp" alt="PMP Instructor" class="hero-img" onerror="this.style.display='none'">
-      <div class="img-ph">INSTRUCTOR PHOTO</div>
-      <div class="fc fc-spots"><div class="fc-num">47</div><div class="fc-lbl">Spots remaining</div></div>
-
-      <!-- PLATFORM REVIEW LINKS -->
-      <div class="hero-platforms">
-        <!-- Google Reviews -->
-        <a href="https://www.google.com/maps/place/EduHubSpot/@41.0702508,-73.5560947,17z/data=!4m8!3m7!1s0x89c2a117b84e43bb:0x1f52d2135608ebba!8m2!3d41.0702509!4d-73.5512238!9m1!1b1!16s%2Fg%2F11t7s9mmhl?entry=ttu&g_ep=EgoyMDI2MDQxNS4wIKXMDSoASAFQAw%3D%3D"
-           target="_blank" rel="noopener" class="platform-link">
-          <svg class="platform-link-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57C21.36 18.19 22.56 15.37 22.56 12.25z" fill="#4285F4"/>
-            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
-            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
-            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
-          </svg>
-          <div class="platform-link-text">
-            <span class="platform-link-label">Rated on Google</span>
-            <span class="platform-link-name">4.9 / 5.0</span>
-            <div class="platform-link-stars">
-              <div class="platform-link-star"></div><div class="platform-link-star"></div>
-              <div class="platform-link-star"></div><div class="platform-link-star"></div>
-              <div class="platform-link-star h"></div>
-            </div>
-            <span class="platform-link-count">1,200+ reviews</span>
-          </div>
-        </a>
-        <!-- Trustpilot Reviews -->
-        <a href="https://www.trustpilot.com/review/eduhubspot.com"
-           target="_blank" rel="noopener" class="platform-link">
-          <svg class="platform-link-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 0L14.59 8.41H23.51L16.46 13.59L19.05 22L12 16.82L4.95 22L7.54 13.59L0.49 8.41H9.41L12 0Z" fill="#00B67A"/>
-            <path d="M16.69 15.36L16.04 13.59L12 16.82L16.69 15.36Z" fill="#005128"/>
-          </svg>
-          <div class="platform-link-text">
-            <span class="platform-link-label">Rated on Trustpilot</span>
-            <span class="platform-link-name">4.9 / 5.0</span>
-            <div class="platform-link-stars">
-              <div class="platform-link-star"></div><div class="platform-link-star"></div>
-              <div class="platform-link-star"></div><div class="platform-link-star"></div>
-              <div class="platform-link-star h"></div>
-            </div>
-            <span class="platform-link-count">1,600+ reviews</span>
-          </div>
-        </a>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -1115,82 +1169,7 @@ body{font-family:var(--body);-webkit-font-smoothing:antialiased;-moz-osx-font-sm
       <div class="flip-back"><div><div class="back-tag">Bonus #3 &middot; Live Only</div><div class="back-title">Secret Surprise</div><div class="back-body">Sit for the complete 90 minutes and unlock this secret &mdash; revealed live only to attendees who stay till the end.</div></div><div><div class="back-divider"></div><div class="back-val">Live Only &middot; Exclusive</div></div></div>
     </div></div>
   </div>
-  
-  <!-- ═══ MOBILE CAROUSEL (shown on mobile only via CSS) ═══ -->
-  <div class="bonus-carousel-wrap" id="bonusCarousel">
-    <div class="carousel-progress"><div class="carousel-progress-fill" id="bprog"></div></div>
-    <div class="carousel-track" id="btrack">
-
-      <div class="bonus-card-m bcm-card-active">
-        <div class="bcm-top">
-          <div class="bcm-icon-wrap">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4M7 8h10M7 11h6"/></svg>
-          </div>
-          <div class="bcm-top-text">
-            <div class="bcm-tag">Bonus #1</div>
-            <div class="bcm-title-sm">ECO Tool</div>
-          </div>
-        </div>
-        <div class="bcm-body">
-          <div class="bcm-body-tag">Bonus #1 · Free Tool</div>
-          <div class="bcm-body-title">ECO (Exam Content Outline) Tool</div>
-          <div class="bcm-body-text">PMP Exam is based on ECO — <strong>not PMBOK.</strong> Review the entire PMP syllabus with this free tool and know exactly what gets tested before you walk in.</div>
-          <div class="bcm-footer"><div class="bcm-val">Value $49 · Yours Free →</div><div class="bcm-unlock">Stay 90 mins</div></div>
-        </div>
-      </div>
-
-      <div class="bonus-card-m">
-        <div class="bcm-top">
-          <div class="bcm-icon-wrap">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M12 14v7M9 18h6"/></svg>
-          </div>
-          <div class="bcm-top-text">
-            <div class="bcm-tag">Bonus #2</div>
-            <div class="bcm-title-sm">Mindset Tool</div>
-          </div>
-        </div>
-        <div class="bcm-body">
-          <div class="bcm-body-tag">Bonus #2 · Exclusive</div>
-          <div class="bcm-body-title">PMI-PMP Mindset Tool</div>
-          <div class="bcm-body-text">Develop the exact PMI mindset to approach every question correctly. <strong>The difference between pass and fail is often mindset — not knowledge.</strong></div>
-          <div class="bcm-footer"><div class="bcm-val">Exclusive · Yours Free →</div><div class="bcm-unlock">Stay 90 mins</div></div>
-        </div>
-      </div>
-
-      <div class="bonus-card-m">
-        <div class="bcm-top">
-          <div class="bcm-icon-wrap">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12V22H4V12"/><path d="M22 7H2v5h20V7z"/><path d="M12 22V7M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
-          </div>
-          <div class="bcm-top-text">
-            <div class="bcm-tag">Bonus #3</div>
-            <div class="bcm-title-sm">Secret Surprise</div>
-          </div>
-        </div>
-        <div class="bcm-body">
-          <div class="bcm-body-tag">Bonus #3 · Live Only</div>
-          <div class="bcm-body-title">Secret Surprise</div>
-          <div class="bcm-body-text">Sit for the complete 90 minutes and unlock this — <strong>revealed live only to attendees who stay till the very end.</strong></div>
-          <div class="bcm-footer"><div class="bcm-val">Live Only · Exclusive →</div><div class="bcm-unlock">Stay 90 mins</div></div>
-        </div>
-      </div>
-
-    </div>
-    <div class="carousel-controls-m">
-      <div class="carousel-dots-m">
-        <div class="cm-dot active" data-bidx="0"></div>
-        <div class="cm-dot" data-bidx="1"></div>
-        <div class="cm-dot" data-bidx="2"></div>
-      </div>
-      <div class="cm-counter"><span id="bcur">1</span> / 3</div>
-      <div class="cm-arrows">
-        <button class="cm-arrow" id="bprev" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
-        <button class="cm-arrow" id="bnext" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
-      </div>
-    </div>
-  </div>
-
-<div class="bonuses-footer">
+  <div class="bonuses-footer">
     <span class="bonuses-ft">Stay for the complete 90 minutes to unlock all three</span>
     <a href="#" class="btn-reserve">Reserve My Spot <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
   </div>
@@ -1432,79 +1411,18 @@ setInterval(tick,1000);
 /* ── INIT ── */
 fetchReviews();
 
-/* ══ BONUS CAROUSEL JS ══ */
+/* ══ TAP TO FLIP (mobile) ══ */
 (function(){
-  var TOTAL=3,DELAY=4000;
-  var btrack=document.getElementById('btrack');
-  var bprog=document.getElementById('bprog');
-  var bcur=document.getElementById('bcur');
-  if(!btrack)return;
-  var bdots=document.querySelectorAll('.cm-dot');
-  var bcards=document.querySelectorAll('.bonus-card-m');
-  var bstage=document.getElementById('bonusCarousel');
-  var cur=0,btimer=null,paused=false;
-
-  function goTo(idx,fromUser){
-    if(fromUser){bpause();setTimeout(bresume,6000);}
-    bcards[cur].classList.remove('bcm-card-active');
-    bdots[cur].classList.remove('active');
-    cur=((idx%TOTAL)+TOTAL)%TOTAL;
-    bcards[cur].classList.add('bcm-card-active');
-    bdots[cur].classList.add('active');
-    btrack.style.transform='translateX(-'+cur*100+'%)';
-    bcur.textContent=cur+1;
-    resetProg();
-  }
-  function resetProg(){
-    clearInterval(btimer);
-    bprog.style.transition='none';
-    bprog.style.width='0%';
-    if(!paused){
-      requestAnimationFrame(function(){
-        bprog.style.transition='width '+DELAY+'ms linear';
-        bprog.style.width='100%';
+  function initTapFlip(){
+    document.querySelectorAll('.flip').forEach(function(card){
+      card.addEventListener('click', function(){
+        card.classList.toggle('tapped');
       });
-    }
+    });
   }
-  function startAuto(){
-    clearInterval(btimer);
-    btimer=setInterval(function(){if(!paused)goTo(cur+1);},DELAY);
-  }
-  function bpause(){
-    paused=true;clearInterval(btimer);
-    bprog.style.transition='none';
-    bprog.style.width=getComputedStyle(bprog).width;
-  }
-  function bresume(){paused=false;resetProg();startAuto();}
-
-  /* Touch */
-  var tx=0,dragging=false;
-  bstage.addEventListener('touchstart',function(e){tx=e.touches[0].clientX;bpause();},{passive:true});
-  bstage.addEventListener('touchmove',function(e){
-    var dx=e.touches[0].clientX-tx;
-    if(Math.abs(dx)>8){
-      dragging=true;
-      btrack.style.transition='none';
-      btrack.style.transform='translateX('+(-(cur*100)+(dx/bstage.offsetWidth)*100)+'%)';
-    }
-  },{passive:true});
-  bstage.addEventListener('touchend',function(e){
-    var dx=e.changedTouches[0].clientX-tx;
-    btrack.style.transition='transform .55s cubic-bezier(.4,0,.2,1)';
-    if(dragging){dx<-50?goTo(cur+1,true):dx>50?goTo(cur-1,true):goTo(cur);}
-    dragging=false;setTimeout(bresume,5000);
-  },{passive:true});
-
-  /* Buttons + dots */
-  document.getElementById('bprev').addEventListener('click',function(){goTo(cur-1,true);});
-  document.getElementById('bnext').addEventListener('click',function(){goTo(cur+1,true);});
-  bdots.forEach(function(d){d.addEventListener('click',function(){goTo(parseInt(d.dataset.bidx),true);});});
-
-  /* Hover */
-  bstage.addEventListener('mouseenter',bpause);
-  bstage.addEventListener('mouseleave',bresume);
-
-  goTo(0);startAuto();
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',initTapFlip);
+  } else { initTapFlip(); }
 })();
 
 </script>
