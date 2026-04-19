@@ -1506,13 +1506,12 @@ body{font-family:var(--body);-webkit-font-smoothing:antialiased;-moz-osx-font-sm
 
 /* ── Footer Logo ── */
 .footer-logo{
-  height:36px;
+  height:52px;
   width:auto;
   display:block;
-  /* SVG has blue + dark text — works on offwhite bg */
 }
 @media(max-width:600px){
-  .footer-logo{height:28px;}
+  .footer-logo{height:40px;}
 }
 
 /* ════════════════════════════════════════
@@ -1527,7 +1526,7 @@ body{font-family:var(--body);-webkit-font-smoothing:antialiased;-moz-osx-font-sm
   -webkit-backdrop-filter:blur(12px);
   border-bottom:1px solid var(--border);
   padding:0 44px;
-  height:56px;
+  height:64px;
   display:flex;align-items:center;justify-content:space-between;
   box-shadow:0 1px 12px rgba(0,0,0,.06);
   transition:box-shadow .2s;
@@ -1536,7 +1535,7 @@ body{font-family:var(--body);-webkit-font-smoothing:antialiased;-moz-osx-font-sm
   box-shadow:0 2px 20px rgba(0,0,0,.1);
 }
 .sticky-nav-logo{
-  height:30px;width:auto;display:block;
+  height:44px;width:auto;display:block;
   flex-shrink:0;
 }
 .sticky-nav-center{
@@ -1563,14 +1562,14 @@ body{font-family:var(--body);-webkit-font-smoothing:antialiased;-moz-osx-font-sm
 .sticky-nav-cta svg{width:11px;height:11px;}
 
 /* Push page down so content isn't hidden under nav */
-body{padding-top:56px!important;}
+body{padding-top:64px!important;}
 
 @media(max-width:768px){
   .sticky-nav{padding:0 16px;height:50px;}
   .sticky-nav-center{display:none;}
-  .sticky-nav-logo{height:24px;}
+  .sticky-nav-logo{height:36px;}
   .sticky-nav-cta{font-size:11px;padding:8px 14px;}
-  body{padding-top:50px!important;}
+  body{padding-top:56px!important;}
 }
 @media(max-width:375px){
   .sticky-nav-cta span{display:none;}
