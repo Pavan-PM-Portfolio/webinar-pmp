@@ -298,24 +298,24 @@ body{font-family:var(--body);-webkit-font-smoothing:antialiased;-moz-osx-font-sm
    SECTION 4: WHO IS THIS FOR (LC1)
 ───────────────────────────────────────── */
 .whosfor{background:var(--white);}
-.wf-top{background:var(--ink);padding:10px 44px;display:flex;align-items:center;justify-content:space-between;}
-.wf-top-l{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#fff;opacity:1;}
-.wf-top-r{display:flex;align-items:center;gap:7px;font-size:10px;color:var(--blue);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;}
-.wf-dot{width:5px;height:5px;border-radius:50%;background:var(--blue);animation:rp 1.3s infinite;}
+
+
+
+
 .wf-head{padding:28px 44px 24px;border-bottom:2px solid var(--ink);display:flex;align-items:flex-end;justify-content:space-between;}
 .wf-hl{font-family:var(--serif);font-size:clamp(22px,2.8vw,34px);font-weight:700;color:var(--ink);letter-spacing:-0.5px;line-height:1.05;}
 .wf-hl em{font-style:italic;color:var(--blue);}
 .wf-head-note{font-size:12px;color:#666;text-align:right;max-width:220px;line-height:1.6;font-weight:400;}
-.wf-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);}
-.wf-card{background:var(--white);padding:28px 22px;display:flex;flex-direction:column;cursor:pointer;border-top:3px solid var(--border);transition:border-top-color .25s,transform .25s,box-shadow .25s;position:relative;overflow:hidden;}
+.wf-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);}
+.wf-card{background:var(--white);padding:36px 32px;display:flex;flex-direction:column;cursor:pointer;border-top:3px solid var(--border);transition:border-top-color .25s,transform .25s,box-shadow .25s;position:relative;overflow:hidden;}
 .wf-card:hover{border-top-color:var(--blue);transform:translateY(-3px);box-shadow:0 8px 32px rgba(66,141,255,.1);}
-.wf-stat{font-family:var(--serif);font-size:52px;font-weight:700;color:var(--blue);letter-spacing:-3px;line-height:1;margin-bottom:4px;transition:color .25s;}
+.wf-stat{font-family:var(--serif);font-size:clamp(52px,6vw,80px);font-weight:700;color:var(--blue);letter-spacing:-3px;line-height:1;margin-bottom:4px;transition:color .25s;}
 .wf-stat-sub{font-size:9px;color:#777;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px;}
 .wf-type{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#aaa;margin-bottom:10px;transition:color .25s;}
 .wf-card:hover .wf-type{color:var(--blue);}
-.wf-quote{font-family:var(--serif);font-style:italic;font-weight:400;font-size:14px;color:#222;line-height:1.55;margin-bottom:12px;border-left:2px solid #bbb;padding-left:12px;flex:1;transition:border-color .25s;}
+.wf-quote{font-family:var(--serif);font-style:italic;font-weight:400;font-size:16px;color:#222;line-height:1.6;margin-bottom:14px;border-left:3px solid #bbb;padding-left:16px;flex:1;transition:border-color .25s;}
 .wf-card:hover .wf-quote{border-left-color:var(--blue);}
-.wf-body{font-size:12px;color:#555;line-height:1.65;font-weight:400;}
+.wf-body{font-size:13px;color:#555;line-height:1.7;font-weight:400;}
 .wf-foot{display:flex;align-items:center;justify-content:space-between;margin-top:16px;padding-top:12px;border-top:1px solid var(--border);transition:border-color .25s;}
 .wf-card:hover .wf-foot{border-color:#c8d9ff;}
 .wf-tag{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#aaa;transition:color .25s;}
@@ -441,7 +441,7 @@ body{font-family:var(--body);-webkit-font-smoothing:antialiased;-moz-osx-font-sm
   /* Flip handled by dedicated bonus mobile block below */
 
   /* Who is this for */
-  .wf-grid{grid-template-columns:1fr!important;}
+  .wf-grid{grid-template-columns:repeat(2,1fr)!important;}
   .wf-head,.wf-footer{padding-left:20px;padding-right:20px;}
   .wf-footer{flex-direction:column;align-items:flex-start;gap:12px;}
 
@@ -501,8 +501,8 @@ body{font-family:var(--body);-webkit-font-smoothing:antialiased;-moz-osx-font-sm
   .bonuses-hl{font-size:clamp(20px,5vw,28px);}
   /* flip card styling handled by dedicated mobile block */
 
-  /* Who is this for — 2 cols on mobile */
-  .wf-grid{grid-template-columns:repeat(2,1fr)!important;}
+  /* Who is this for — 1 col on small mobile */
+  .wf-grid{grid-template-columns:1fr!important;}
   .wf-stat{font-size:38px!important;}
   .wf-hl{font-size:clamp(20px,5vw,28px);}
   .wf-card{padding:20px 16px 16px;}
@@ -930,6 +930,137 @@ body{font-family:var(--body);-webkit-font-smoothing:antialiased;-moz-osx-font-sm
   .back-title{font-size:15px!important;}
   .back-body{font-size:11px!important;}
 }
+
+/* ════════════════════════════════════════
+   WHO IS THIS FOR — D2 SPOTLIGHT
+════════════════════════════════════════ */
+.whosfor{background:var(--white);}
+
+.wf-top-bar{
+  background:var(--ink);
+  padding:10px 44px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.wf-top-bar-l{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#fff;}
+.wf-top-bar-r{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--blue);}
+
+.wf2-head{
+  padding:28px 44px 0;
+  display:flex;align-items:flex-end;justify-content:space-between;
+}
+.wf2-hl{font-family:var(--serif);font-size:clamp(22px,2.8vw,36px);font-weight:700;color:var(--ink);letter-spacing:-0.5px;line-height:1.05;}
+.wf2-hl em{font-style:italic;color:var(--blue);}
+.wf2-note{font-size:12px;color:var(--dg);max-width:200px;text-align:right;line-height:1.6;font-weight:300;}
+
+/* Tabs */
+.wf2-tabs{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1px;background:var(--border);
+  margin-top:24px;
+}
+.wf2-tab{
+  background:var(--bg);
+  padding:20px 22px;
+  cursor:pointer;
+  border-top:3px solid transparent;
+  transition:background .2s,border-top-color .2s;
+}
+.wf2-tab:hover{background:var(--white);}
+.wf2-tab.active{background:var(--white);border-top-color:var(--blue);}
+.wf2-tab-stat{
+  font-family:var(--serif);
+  font-size:34px;font-weight:700;
+  color:var(--lg);letter-spacing:-2px;line-height:1;
+  margin-bottom:4px;transition:color .2s;
+}
+.wf2-tab.active .wf2-tab-stat,
+.wf2-tab:hover .wf2-tab-stat{color:var(--blue);}
+.wf2-tab-type{font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--border);margin-bottom:3px;transition:color .2s;}
+.wf2-tab.active .wf2-tab-type{color:var(--blue);}
+.wf2-tab-label{font-size:12px;font-weight:700;color:var(--ink);}
+
+/* Panels */
+.wf2-panel{
+  display:none;
+  padding:40px 44px;
+  background:var(--white);
+  border-top:1px solid var(--border);
+}
+@keyframes wf2fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.wf2-panel.active{
+  display:grid;
+  grid-template-columns:1fr 1px 1fr;
+  gap:0;
+  animation:wf2fade .35s ease;
+}
+.wf2-psep{background:var(--border);}
+.wf2-left{padding-right:48px;}
+.wf2-right{padding-left:48px;display:flex;align-items:center;}
+
+.wf2-big-stat{
+  font-family:var(--serif);
+  font-size:clamp(72px,8vw,110px);
+  font-weight:700;color:var(--blue);
+  letter-spacing:-5px;line-height:1;
+  margin-bottom:4px;
+}
+.wf2-stat-sub{font-size:9px;color:var(--dg);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;}
+.wf2-bar-track{height:4px;background:var(--lg);overflow:hidden;margin-bottom:22px;}
+.wf2-bar-fill{
+  height:100%;background:var(--blue);
+  width:0;
+  transition:width .9s cubic-bezier(.4,0,.2,1);
+}
+.wf2-tag{
+  font-size:9px;font-weight:700;letter-spacing:2.5px;
+  text-transform:uppercase;color:var(--blue);
+  margin-bottom:12px;display:flex;align-items:center;gap:8px;
+}
+.wf2-tag::after{content:'';flex:1;height:1px;background:var(--blue);opacity:.25;}
+.wf2-quote{
+  font-family:var(--serif);font-style:italic;
+  font-size:clamp(16px,1.8vw,20px);
+  color:var(--ink);line-height:1.6;
+  border-left:3px solid var(--blue);
+  padding-left:18px;
+}
+.wf2-body{
+  font-size:14px;color:#555;
+  line-height:1.85;font-weight:300;
+}
+.wf2-body strong{color:var(--ink);font-weight:600;}
+
+/* Footer */
+.wf2-footer{
+  padding:14px 44px;
+  background:var(--bg);
+  border-top:1px solid var(--border);
+  display:flex;justify-content:space-between;align-items:center;
+}
+.wf2-ft{font-size:10px;color:#bbb;letter-spacing:1.5px;text-transform:uppercase;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  .wf2-head,.wf-top-bar,.wf2-footer{padding-left:20px;padding-right:20px;}
+  .wf2-head{flex-direction:column;align-items:flex-start;gap:8px;padding-bottom:0;}
+  .wf2-note{text-align:left;max-width:none;}
+  .wf2-tabs{grid-template-columns:repeat(2,1fr);}
+  .wf2-panel.active{
+    grid-template-columns:1fr!important;
+    padding:24px 20px;
+  }
+  .wf2-psep{display:none;}
+  .wf2-left{padding-right:0;padding-bottom:24px;border-bottom:1px solid var(--border);}
+  .wf2-right{padding-left:0;padding-top:24px;}
+  .wf2-big-stat{font-size:clamp(60px,12vw,80px);}
+}
+@media(max-width:480px){
+  .wf2-tabs{grid-template-columns:repeat(2,1fr);}
+  .wf2-tab{padding:14px 14px;}
+  .wf2-tab-stat{font-size:26px;}
+  .wf2-quote{font-size:15px;}
+  .wf2-body{font-size:13px;}
+}
 </style>
 </head>
 <body>
@@ -1181,20 +1312,100 @@ body{font-family:var(--body);-webkit-font-smoothing:antialiased;-moz-osx-font-sm
 ═══════════════════════════ -->
 <section class="whosfor" style="border-top:1px solid var(--ink);">
 
-  <div class="wf-head">
-    <h2 class="wf-hl">Is This <em>For You?</em></h2>
-    <div class="wf-head-note">Four profiles. If even one sounds like you — this seat is yours.</div>
+  <!-- D2 SPOTLIGHT SELECTOR CSS injected inline for self-containment -->
+
+  <div class="wf2-head">
+    <h2 class="wf2-hl">Is This <em>For You?</em></h2>
+    <div class="wf2-note">Four profiles. Click the one that sounds like you.</div>
   </div>
-  <div class="wf-grid">
-    <div class="wf-card"><div class="wf-stat">78%</div><div class="wf-stat-sub">of our students</div><div class="wf-type">Learning Style</div><div class="wf-quote">"I hate reading textbooks. I need to see it to understand it."</div><div class="wf-body">Our case-based approach replaced 500 pages of PMBOK. Zero textbooks required.</div><div class="wf-foot"><span class="wf-tag">Visual Learner</span><span class="wf-arr">→</span></div></div>
-    <div class="wf-card"><div class="wf-stat">64%</div><div class="wf-stat-sub">of our students</div><div class="wf-type">Schedule</div><div class="wf-quote">"By 6 PM I'm exhausted. I have no energy left to study."</div><div class="wf-body">64% were full-time professionals. Two focused hours was enough to pass.</div><div class="wf-foot"><span class="wf-tag">Busy Professional</span><span class="wf-arr">→</span></div></div>
-    <div class="wf-card"><div class="wf-stat">71%</div><div class="wf-stat-sub">of our students</div><div class="wf-type">Experience</div><div class="wf-quote">"I'd never done Agile. I thought that would fail me."</div><div class="wf-body">71% had zero Agile experience. We start from scratch — no jargon needed.</div><div class="wf-foot"><span class="wf-tag">No Agile Background</span><span class="wf-arr">→</span></div></div>
-    <div class="wf-card"><div class="wf-stat">83%</div><div class="wf-stat-sub">of our students</div><div class="wf-type">Application</div><div class="wf-quote">"The application form stopped me before I started."</div><div class="wf-body">83% felt overwhelmed. We walk through the application step by step.</div><div class="wf-foot"><span class="wf-tag">Scared of Application</span><span class="wf-arr">→</span></div></div>
+
+  <!-- TABS -->
+  <div class="wf2-tabs">
+    <div class="wf2-tab active" onclick="wfTab(0,this)">
+      <div class="wf2-tab-stat">78%</div>
+      <div class="wf2-tab-type">Learning Style</div>
+      <div class="wf2-tab-label">Visual Learner</div>
+    </div>
+    <div class="wf2-tab" onclick="wfTab(1,this)">
+      <div class="wf2-tab-stat">64%</div>
+      <div class="wf2-tab-type">Schedule</div>
+      <div class="wf2-tab-label">Busy Professional</div>
+    </div>
+    <div class="wf2-tab" onclick="wfTab(2,this)">
+      <div class="wf2-tab-stat">71%</div>
+      <div class="wf2-tab-type">Experience</div>
+      <div class="wf2-tab-label">No Agile Background</div>
+    </div>
+    <div class="wf2-tab" onclick="wfTab(3,this)">
+      <div class="wf2-tab-stat">83%</div>
+      <div class="wf2-tab-type">Application</div>
+      <div class="wf2-tab-label">Scared of Application</div>
+    </div>
   </div>
-  <div class="wf-footer">
-    <span class="wf-ft">If even one of these sounds like you — this masterclass is for you</span>
+
+  <!-- PANELS -->
+  <div id="wfp0" class="wf2-panel active">
+    <div class="wf2-left">
+      <div class="wf2-big-stat">78%</div>
+      <div class="wf2-stat-sub">of our students</div>
+      <div class="wf2-bar-track"><div class="wf2-bar-fill" style="width:78%"></div></div>
+      <div class="wf2-tag">Learning Style</div>
+      <div class="wf2-quote">&ldquo;I hate reading textbooks. I need to see it to understand it.&rdquo;</div>
+    </div>
+    <div class="wf2-psep"></div>
+    <div class="wf2-right">
+      <div class="wf2-body">78% of our students told us they couldn&rsquo;t get through a single PMBOK chapter. Our case-based approach replaced all 500 pages with real-world scenarios, visual walkthroughs and pattern recognition. Zero textbooks &mdash; ever.<br><br>If you retain information by seeing and doing rather than reading, you are exactly who this masterclass was built for.</div>
+    </div>
+  </div>
+
+  <div id="wfp1" class="wf2-panel">
+    <div class="wf2-left">
+      <div class="wf2-big-stat">64%</div>
+      <div class="wf2-stat-sub">of our students</div>
+      <div class="wf2-bar-track"><div class="wf2-bar-fill" style="width:64%"></div></div>
+      <div class="wf2-tag">Schedule</div>
+      <div class="wf2-quote">&ldquo;By 6 PM I&rsquo;m exhausted. I have no energy left to study.&rdquo;</div>
+    </div>
+    <div class="wf2-psep"></div>
+    <div class="wf2-right">
+      <div class="wf2-body">64% of our students were full-time working professionals when they attended. No homework. No prep. No weekend study sessions.<br><br>Just two focused live hours on October 15 &mdash; and they walked away with everything they needed to pass on their first attempt in under 30 days.</div>
+    </div>
+  </div>
+
+  <div id="wfp2" class="wf2-panel">
+    <div class="wf2-left">
+      <div class="wf2-big-stat">71%</div>
+      <div class="wf2-stat-sub">of our students</div>
+      <div class="wf2-bar-track"><div class="wf2-bar-fill" style="width:71%"></div></div>
+      <div class="wf2-tag">Experience</div>
+      <div class="wf2-quote">&ldquo;I&rsquo;d never done Agile. I thought that would fail me.&rdquo;</div>
+    </div>
+    <div class="wf2-psep"></div>
+    <div class="wf2-right">
+      <div class="wf2-body">71% had zero Agile experience before attending. Scrum, Kanban, sprints &mdash; we start from absolute scratch. No jargon assumed, no prior exposure needed.<br><br>By the end of the session you&rsquo;ll understand Agile well enough to answer any PMP exam question about it confidently.</div>
+    </div>
+  </div>
+
+  <div id="wfp3" class="wf2-panel">
+    <div class="wf2-left">
+      <div class="wf2-big-stat">83%</div>
+      <div class="wf2-stat-sub">of our students</div>
+      <div class="wf2-bar-track"><div class="wf2-bar-fill" style="width:83%"></div></div>
+      <div class="wf2-tag">Application</div>
+      <div class="wf2-quote">&ldquo;The application form stopped me before I even started.&rdquo;</div>
+    </div>
+    <div class="wf2-psep"></div>
+    <div class="wf2-right">
+      <div class="wf2-body">83% of attendees said the PMP application form was the biggest barrier. We walk through every section of it &mdash; step by step &mdash; so nothing stands between you and exam day.<br><br>If you&rsquo;ve been sitting on the idea for months because the application felt overwhelming, this session is specifically for you.</div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="wf2-footer">
+    <span class="wf2-ft">If even one of these sounds like you &mdash; this masterclass is for you</span>
     <a href="#" class="btn-reserve btn-reserve-dark">Reserve My Spot <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
   </div>
+
 </section>
 
 <!-- ═══════════════════════════
@@ -1411,6 +1622,40 @@ setInterval(tick,1000);
 
 /* ── INIT ── */
 fetchReviews();
+
+/* ══ WHO IS THIS FOR — D2 TAB JS ══ */
+function wfTab(idx, el){
+  document.querySelectorAll('.wf2-tab').forEach(function(t){t.classList.remove('active');});
+  document.querySelectorAll('.wf2-panel').forEach(function(p){p.classList.remove('active');});
+  el.classList.add('active');
+  var panel = document.getElementById('wfp'+idx);
+  panel.classList.add('active');
+  // Re-trigger bar animation
+  var bar = panel.querySelector('.wf2-bar-fill');
+  var targetW = bar.style.width;
+  bar.style.transition = 'none';
+  bar.style.width = '0';
+  requestAnimationFrame(function(){
+    requestAnimationFrame(function(){
+      bar.style.transition = 'width .9s cubic-bezier(.4,0,.2,1)';
+      bar.style.width = targetW;
+    });
+  });
+}
+// Init first bar on load
+window.addEventListener('load', function(){
+  var firstBar = document.querySelector('#wfp0 .wf2-bar-fill');
+  if(firstBar){
+    var w = firstBar.style.width;
+    firstBar.style.transition='none';
+    firstBar.style.width='0';
+    requestAnimationFrame(function(){requestAnimationFrame(function(){
+      firstBar.style.transition='width .9s cubic-bezier(.4,0,.2,1)';
+      firstBar.style.width=w;
+    });});
+  }
+});
+
 
 /* ══ TAP TO FLIP (mobile) ══ */
 (function(){
