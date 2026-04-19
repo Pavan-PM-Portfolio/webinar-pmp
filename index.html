@@ -1575,6 +1575,34 @@ body{padding-top:64px!important;}
   .sticky-nav-cta span{display:none;}
   .sticky-nav-cta::after{content:"Register";}
 }
+
+/* ── HERO IMAGE MOBILE FIX ── */
+@media(max-width:768px){
+  .hero-right{
+    min-height:380px!important;
+    max-height:480px!important;
+  }
+  .hero-img{
+    object-position:center top!important;
+  }
+}
+@media(max-width:480px){
+  .hero-right{
+    min-height:320px!important;
+    max-height:420px!important;
+  }
+  .hero-img{
+    object-fit:contain!important;
+    object-position:center top!important;
+    background:#ece8e0;
+  }
+}
+@media(max-width:375px){
+  .hero-right{
+    min-height:280px!important;
+    max-height:360px!important;
+  }
+}
 </style>
 </head>
 <body>
