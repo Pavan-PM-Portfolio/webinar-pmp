@@ -1514,9 +1514,92 @@ body{font-family:var(--body);-webkit-font-smoothing:antialiased;-moz-osx-font-sm
 @media(max-width:600px){
   .footer-logo{height:28px;}
 }
+
+/* ════════════════════════════════════════
+   STICKY NAV
+════════════════════════════════════════ */
+.sticky-nav{
+  position:fixed;
+  top:0;left:0;right:0;
+  z-index:1000;
+  background:rgba(255,255,255,0.95);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  padding:0 44px;
+  height:56px;
+  display:flex;align-items:center;justify-content:space-between;
+  box-shadow:0 1px 12px rgba(0,0,0,.06);
+  transition:box-shadow .2s;
+}
+.sticky-nav.scrolled{
+  box-shadow:0 2px 20px rgba(0,0,0,.1);
+}
+.sticky-nav-logo{
+  height:30px;width:auto;display:block;
+  flex-shrink:0;
+}
+.sticky-nav-center{
+  display:flex;align-items:center;gap:20px;
+  font-size:11px;color:var(--dg);font-weight:600;
+  letter-spacing:0.3px;
+}
+.sticky-nav-center span{color:var(--blue);font-weight:700;}
+.sticky-nav-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--red);animation:rp 1.2s infinite;
+  flex-shrink:0;
+}
+.sticky-nav-cta{
+  display:inline-flex;align-items:center;gap:7px;
+  background:var(--blue);color:#fff;
+  font-size:12px;font-weight:700;
+  padding:9px 20px;text-decoration:none;
+  white-space:nowrap;
+  transition:opacity .2s;
+  flex-shrink:0;
+}
+.sticky-nav-cta:hover{opacity:.88;}
+.sticky-nav-cta svg{width:11px;height:11px;}
+
+/* Push page down so content isn't hidden under nav */
+body{padding-top:56px!important;}
+
+@media(max-width:768px){
+  .sticky-nav{padding:0 16px;height:50px;}
+  .sticky-nav-center{display:none;}
+  .sticky-nav-logo{height:24px;}
+  .sticky-nav-cta{font-size:11px;padding:8px 14px;}
+  body{padding-top:50px!important;}
+}
+@media(max-width:375px){
+  .sticky-nav-cta span{display:none;}
+  .sticky-nav-cta::after{content:"Register";}
+}
 </style>
 </head>
 <body>
+
+<!-- ═══════════════════════════
+     STICKY NAV
+═══════════════════════════ -->
+<nav class="sticky-nav" id="stickyNav">
+  <a href="#" style="display:flex;align-items:center;">
+    <img src="images/logo.svg" alt="EduHubSpot" class="sticky-nav-logo">
+  </a>
+  <div class="sticky-nav-center">
+    <span class="sticky-nav-dot"></span>
+    <span>Free Live Masterclass</span>
+    <span style="color:var(--border)">·</span>
+    <span>October 15, 2025</span>
+    <span style="color:var(--border)">·</span>
+    <span><span>47 spots</span> remaining</span>
+  </div>
+  <a href="#register" class="sticky-nav-cta">
+    Reserve My Spot
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+  </a>
+</nav>
 
 <div style="margin:0;padding:0;">
 
@@ -2365,5 +2448,19 @@ window.addEventListener('load', function(){
   </div>
 
 </footer>
+<script>
+/* ══ STICKY NAV JS ══ */
+(function(){
+  var nav = document.getElementById('stickyNav');
+  if(!nav) return;
+  window.addEventListener('scroll', function(){
+    if(window.scrollY > 10){
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+  }, {passive:true});
+})();
+</script>
 </body>
 </html>
