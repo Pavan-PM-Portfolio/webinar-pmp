@@ -746,13 +746,13 @@ body{font-family:var(--body);-webkit-font-smoothing:antialiased;-moz-osx-font-sm
 .footer-social{display:flex;gap:10px;align-items:center;}
 .footer-social a{
   display:inline-flex;align-items:center;justify-content:center;
-  width:28px;height:28px;
-  color:#777;text-decoration:none;
-  font-size:10px;font-weight:700;
-  border:1px solid #bbb;
-  transition:color .15s,border-color .15s;
+  width:32px;height:32px;
+  color:#fff;text-decoration:none;
+  background:var(--ink);
+  border:none;
+  transition:background .15s;
 }
-.footer-social a:hover{color:var(--ink);border-color:var(--ink);}
+.footer-social a:hover{background:#333;}
 .footer-copy{font-size:11px;color:#888;white-space:nowrap;}
 
 /* bonus mobile handled by carousel show/hide */
@@ -1415,6 +1415,93 @@ body{font-family:var(--body);-webkit-font-smoothing:antialiased;-moz-osx-font-sm
   .fc-tn{font-size:22px!important;}
   .footer-top,.footer-bottom{padding:14px!important;}
   .footer-hl{font-size:clamp(18px,6vw,24px)!important;}
+}
+
+/* ════════════════════════════════
+   FOOTER + FINAL CTA MOBILE FIX
+════════════════════════════════ */
+@media(max-width:600px){
+
+  /* Footer top CTA — force stack */
+  .footer-top{
+    display:flex!important;
+    flex-direction:column!important;
+    padding:24px 16px!important;
+    gap:20px!important;
+  }
+  .footer-top-left,
+  .footer-top-right{
+    width:100%!important;
+    max-width:100%!important;
+    flex-shrink:0!important;
+  }
+  .footer-top-right{
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:stretch!important;
+    gap:10px!important;
+  }
+  .footer-btn{
+    display:flex!important;
+    width:100%!important;
+    justify-content:center!important;
+    padding:14px 20px!important;
+    font-size:15px!important;
+    box-sizing:border-box!important;
+  }
+  .footer-spots{
+    justify-content:flex-start!important;
+    font-size:12px!important;
+  }
+  .footer-hl{font-size:clamp(20px,6vw,28px)!important;}
+  .footer-sub{font-size:13px!important;line-height:1.6!important;}
+
+  /* Final CTA spots text below button */
+  .fc-cta-row{
+    display:flex!important;
+    flex-direction:column!important;
+    gap:10px!important;
+    width:100%!important;
+  }
+  .fc-cta-row .btn-reserve{
+    display:flex!important;
+    width:100%!important;
+    justify-content:center!important;
+    padding:14px 20px!important;
+    font-size:15px!important;
+    box-sizing:border-box!important;
+  }
+  .fc-spots{
+    display:flex!important;
+    justify-content:center!important;
+    font-size:12px!important;
+    flex-wrap:wrap!important;
+    gap:4px!important;
+  }
+
+  /* Prevent any horizontal overflow */
+  .footer-top,
+  .footer-bottom,
+  .fc-left,
+  .fc-right{
+    overflow:hidden!important;
+    max-width:100vw!important;
+  }
+}
+
+/* ── Footer button text overflow fix ── */
+@media(max-width:600px){
+  .footer-btn{
+    font-size:14px!important;
+    padding:13px 16px!important;
+    white-space:nowrap!important;
+    overflow:hidden!important;
+    text-overflow:ellipsis!important;
+  }
+  .footer-btn svg{
+    flex-shrink:0!important;
+    width:12px!important;height:12px!important;
+  }
 }
 </style>
 </head>
@@ -2243,11 +2330,24 @@ window.addEventListener('load', function(){
     </div>
     <div class="footer-right">
       <div class="footer-social">
-        <a href="https://facebook.com/eduhubspot" target="_blank" rel="noopener">fb</a>
-        <a href="https://instagram.com/eduhubspot" target="_blank" rel="noopener">ig</a>
-        <a href="https://twitter.com/eduhubspot" target="_blank" rel="noopener">tw</a>
-        <a href="https://linkedin.com/company/eduhubspot" target="_blank" rel="noopener">in</a>
-        <a href="https://youtube.com/eduhubspot" target="_blank" rel="noopener">yt</a>
+        <!-- Facebook -->
+        <a href="https://facebook.com/eduhubspot" target="_blank" rel="noopener" aria-label="Facebook">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <!-- Instagram -->
+        <a href="https://instagram.com/eduhubspot" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <!-- LinkedIn -->
+        <a href="https://linkedin.com/company/eduhubspot" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <!-- YouTube -->
+        <a href="https://youtube.com/eduhubspot" target="_blank" rel="noopener" aria-label="YouTube">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+          </svg>
+        </a>
       </div>
       <div class="footer-copy">&copy; 2026 EduHubSpot. All rights reserved.</div>
     </div>
