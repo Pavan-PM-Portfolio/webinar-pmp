@@ -1503,6 +1503,17 @@ body{font-family:var(--body);-webkit-font-smoothing:antialiased;-moz-osx-font-sm
     width:12px!important;height:12px!important;
   }
 }
+
+/* ── Footer Logo ── */
+.footer-logo{
+  height:36px;
+  width:auto;
+  display:block;
+  /* SVG has blue + dark text — works on offwhite bg */
+}
+@media(max-width:600px){
+  .footer-logo{height:28px;}
+}
 </style>
 </head>
 <body>
@@ -2320,7 +2331,7 @@ window.addEventListener('load', function(){
 
   <!-- Bottom bar -->
   <div class="footer-bottom">
-    <div class="footer-brand">Edu<span>Hub</span>Spot</div>
+    <div class="footer-brand"><img src="images/logo.svg" alt="EduHubSpot" class="footer-logo"></div>
     <div class="footer-links">
       <a href="#" class="footer-link">Privacy Policy</a>
       <a href="#" class="footer-link">Terms &amp; Conditions</a>
